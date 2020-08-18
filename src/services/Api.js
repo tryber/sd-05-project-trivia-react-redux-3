@@ -12,7 +12,6 @@ const TRIVIA = {
 
 const GRAVATAR = {
   URL: 'https://www.gravatar.com',
-  DEFAULT: 'https://www.gravatar.com/avatar/2d3bf5b67282f5f466e503d7022abcf3',
   api(email) {
     return `${this.URL}/avatar/${md5(email)}`;
   },
@@ -43,12 +42,9 @@ const getTriviaQuestions = (token) => (
 );
 
 const getProfilePicture = (email) => (
-  fetch(GRAVATAR.api(email))
-    .then(({ url }) => url)
-    .catch((error) => {
-      console.error(error);
-      return GRAVATAR.DEFAULT;
-    })
+  new Promise((resolve) => {
+    resolve(GRAVATAR.api(email));
+  })
 );
 
 export {
