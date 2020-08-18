@@ -10,7 +10,7 @@ function createInput({ type, getValue, id, name, testId }) {
       id={id || ''}
       type={type || 'text'}
       onChange={({ target }) => getValue(target.value)}
-    />  
+    />
   );
 }
 
@@ -23,8 +23,7 @@ function createTextArea({ getValue, cols, rows, id, name, testId }) {
       cols={cols || '10'}
       rows={rows || '10'}
       onChange={({ target }) => getValue(target.value)}
-    >
-    </textarea>
+    />
   );
 }
 
@@ -56,7 +55,7 @@ function Input(props) {
       return createInput({ type, getValue, id, name, testId });
     default:
       return createInput({ type: 'text', getValue, id, name, testId });
-  };
+  }
 }
 
 function Select(props) {
@@ -69,16 +68,43 @@ Input.propTypes = {
   cols: propTypes.number,
   rows: propTypes.number,
   name: propTypes.string,
+  id: propTypes.string,
   testId: propTypes.string,
-  getValue: propTypes.func
-}
+  getValue: propTypes.func,
+};
 
 Select.propTypes = {
   name: propTypes.string,
+  id: propTypes.string,
   testId: propTypes.string,
   getValue: propTypes.func,
   options: propTypes.arrayOf(propTypes.object),
+};
+
+createInput.propTypes = {
+  type: propTypes.string,
+  id: propTypes.string,
+  name: propTypes.string,
+  testId: propTypes.string,
+  getValue: propTypes.func,
 }
+
+createTextArea.propTypes = {
+  getValue: propTypes.func,
+  cols: propTypes.number,
+  rows: propTypes.number,
+  id: propTypes.string,
+  name: propTypes.string,
+  testId: propTypes.string,
+}
+
+createSelect.propTypes = {
+  name: propTypes.string,
+  testId: propTypes.string,
+  id: propTypes.string,
+  getValue: propTypes.func,
+  options: propTypes.arrayOf(propTypes.object),
+};
 
 export {
   Input,
