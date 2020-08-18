@@ -2,11 +2,11 @@ import React from 'react';
 import logo from './trivia.png';
 import './App.css';
 
-import { getProfilePicture } from './services/Api';
+import { getTriviaQuestions } from './services/Api';
 
 export default function App() {
   /* Teste da API */
-  getProfilePicture('luis@gmail.com')
+  getTriviaQuestions('8475959b2ccbaff0be84996c7bf673c0aefa3ac9263f5269cf5daa9e5b411cd1')
     .then((res) => {
       console.log(res);
     });

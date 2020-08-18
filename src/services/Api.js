@@ -2,7 +2,7 @@ import md5 from 'crypto-js/md5';
 
 const TRIVIA = {
   URL: 'https://opentdb.com',
-  token() {
+  requestToken() {
     return `${this.URL}/api_token.php?command=request`;
   },
   questions(token) {
@@ -18,24 +18,26 @@ const GRAVATAR = {
   },
 };
 
-const getQuestions = () => (
-  fetch(TRIVIA.token())
+const getTriviaToken = () => (
+  fetch(TRIVIA.requestToken())
     .then((response) => (
       response.json()
-        .then(({ token }) => (
-          fetch(TRIVIA.questions(token))
-            .then((res) => (
-              res.json()
-                .then(({ results }) => (results))
-            ))
-            .catch((error) => {
-              console.error(error, 'Token inválido!');
-              return [];
-            })
-      ))
+        .then(({ token }) => (token))
+        .catch((error) => {
+          console.error(error, 'Erro na requisição');
+          return '';
+        })
+    ))
+);
+
+const getTriviaQuestions = (token) => (
+  fetch(TRIVIA.questions(token))
+    .then((res) => (
+      res.json()
+        .then(({ results }) => (results))
     ))
     .catch((error) => {
-      console.error(error, 'Erro na requisição');
+      console.error(error, 'Token inválido!');
       return [];
     })
 );
@@ -50,6 +52,7 @@ const getProfilePicture = (email) => (
 );
 
 export {
-  getQuestions,
+  getTriviaToken,
+  getTriviaQuestions,
   getProfilePicture,
 };
