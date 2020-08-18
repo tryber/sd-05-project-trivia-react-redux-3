@@ -28,7 +28,7 @@ function createTextArea({ getValue, cols, rows, id, name, testId }) {
 }
 
 function createSelect({ getValue, options, id, name, testId }) {
-  return(
+  return (
     <select
       name={name}
       data-testid={testId || ''}
@@ -46,7 +46,7 @@ function createSelect({ getValue, options, id, name, testId }) {
 
 function Input(props) {
   const { type, getValue, cols, rows, id, name, testId } = props;
-  switch(type) {
+  switch (type) {
     case 'text-area':
       return createTextArea({ getValue, cols, rows, id, name, testId });
     case 'number':
@@ -87,7 +87,7 @@ createInput.propTypes = {
   name: propTypes.string,
   testId: propTypes.string,
   getValue: propTypes.func,
-}
+};
 
 createTextArea.propTypes = {
   getValue: propTypes.func,
@@ -106,7 +106,52 @@ createSelect.propTypes = {
   options: propTypes.arrayOf(propTypes.object),
 };
 
+// Defaults
+
+Input.defaultProps = {
+  type: 'text',
+  cols: 10,
+  rows: 10,
+  name: '',
+  id: '',
+  testId: '',
+  getValue: () => {},
+};
+
+Select.defaultProps = {
+  name: '',
+  id: '',
+  testId: '',
+  getValue: () => {},
+  options: propTypes.arrayOf(propTypes.object),
+};
+
+createInput.defaultProps = {
+  type: 'text',
+  id: '',
+  name: '',
+  testId: '',
+  getValue: () => {},
+};
+
+createTextArea.defaultProps = {
+  getValue: () => {},
+  cols: propTypes.number,
+  rows: propTypes.number,
+  id: '',
+  name: '',
+  testId: '',
+}
+
+createSelect.defaultProps = {
+  name: '',
+  testId: '',
+  id: '',
+  getValue: () => {},
+  options: propTypes.arrayOf(propTypes.object),
+};
+
 export {
   Input,
   Select,
-}
+};
