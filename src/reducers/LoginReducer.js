@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   user: {
     email: '',
     user: '',
-  }
+  },
 };
 
 const loginReducer = (state = INITIAL_STATE, action) => {

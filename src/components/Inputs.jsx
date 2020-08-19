@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { unique } from '../utils';
+import unique from '../utils';
 
 function createInput({ type, getValue, id, name, testId }) {
   return (
@@ -74,7 +74,7 @@ function Button(props) {
       value={children}
     />
   )
-}
+};
 
 Input.propTypes = {
   type: propTypes.string,
@@ -121,9 +121,10 @@ createSelect.propTypes = {
 
 Button.propTypes = {
   disabled: propTypes.bool,
-  onClick: propTypes.func, 
+  children: propTypes.string,
+  onClick: propTypes.func,
   testId: propTypes.string,
-}
+};
 
 // Defaults
 
@@ -174,7 +175,7 @@ Button.defaultProps = {
   disabled: false,
   onClick: () => {},
   testId: '',
-}
+};
 
 export {
   Input,

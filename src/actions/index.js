@@ -39,4 +39,4 @@ function fetchToken() {
 export {
   fetchToken,
   loginUser,
-}
+};
