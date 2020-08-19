@@ -1,8 +1,11 @@
 import React from 'react';
-import logo from './trivia.png';
 import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { getTriviaQuestions, getProfilePicture } from './services/Api';
+
+import Home from './components/Home';
+import Game from './components/Game';
 
 export default function App() {
   /* Teste da API */
@@ -16,13 +19,11 @@ export default function App() {
     });
   /*  Fim do teste da API */
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          SUA VEZ
-        </p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/gameplay" component={Game} />
+      </Switch>
+    </BrowserRouter>
   );
 }
