@@ -73,8 +73,8 @@ function Button(props) {
       onClick={onClick}
       value={children}
     />
-  )
-};
+  );
+}
 
 Input.propTypes = {
   type: propTypes.string,
@@ -175,6 +175,7 @@ Button.defaultProps = {
   disabled: false,
   onClick: () => {},
   testId: '',
+  children: 'Botão',
 };
 
 export {
