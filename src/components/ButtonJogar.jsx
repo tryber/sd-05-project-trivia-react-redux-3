@@ -6,7 +6,7 @@ import { fetchToken } from '../actions/index';
 import { saveTokenLocalStorage } from '../services/localStorage';
 
 class PlayButton extends React.Component {
-  teste = () => {
+  teste() {
     const { getToken } = this.props;
     getToken();
     saveTokenLocalStorage('teste');

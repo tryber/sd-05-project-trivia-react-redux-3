@@ -2,7 +2,7 @@ import { getTriviaToken } from '../services/Api';
 
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const RECEIVE_TOKEN_SUCCESS = 'RECEIVE_TOKEN_SUCCESS';
-export const RECEIVE_TOKEN_FAILURE =- 'RECEIVE_TOKEN_FAILURE';
+export const RECEIVE_TOKEN_FAILURE = 'RECEIVE_TOKEN_FAILURE';
 
 const requestToken = () => ({
   type: REQUEST_TOKEN,
@@ -25,7 +25,7 @@ export function fetchToken() {
     return getTriviaToken()
       .then(
         (token) => dispatch(receiveTokenSuccess(token)),
-        (error => dispatch(receiveTokenFailure(error.message))),
+        (error) => dispatch(receiveTokenFailure(error.message)),
       );
   };
 }
