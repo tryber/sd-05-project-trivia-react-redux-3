@@ -20,4 +20,4 @@ estipular o data-testid respectivamente.
   ];
 ```
 - Depois realize a tag
-`<Select options={opt} getValue={(value) => console.log(value)} />`
+`<Select options={options} getValue={(value) => console.log(value)} />`
