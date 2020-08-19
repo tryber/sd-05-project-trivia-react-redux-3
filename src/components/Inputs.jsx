@@ -96,7 +96,7 @@ createTextArea.propTypes = {
   id: propTypes.string,
   name: propTypes.string,
   testId: propTypes.string,
-}
+};
 
 createSelect.propTypes = {
   name: propTypes.string,
@@ -141,7 +141,7 @@ createTextArea.defaultProps = {
   id: '',
   name: '',
   testId: '',
-}
+};
 
 createSelect.defaultProps = {
   name: '',
