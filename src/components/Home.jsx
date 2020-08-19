@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../trivia.png';
-import ButtonJogar from './ButtonJogar';
+import Login from './Login';
 
 class Home extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class Home extends React.Component {
           <p>
             SUA VEZ
           </p>
-          <ButtonJogar />
+          <Login />
         </header>
       </div>
     );

@@ -63,6 +63,19 @@ function Select(props) {
   return createSelect({ getValue, id, name, testId, options });
 }
 
+function Button(props) {
+  const { disabled, testId, onClick, children } = props;
+  return (
+    <input
+      data-testid={testId}
+      type="submit"
+      disabled={disabled}
+      onClick={onClick}
+      value={children}
+    />
+  )
+}
+
 Input.propTypes = {
   type: propTypes.string,
   cols: propTypes.number,
@@ -105,6 +118,12 @@ createSelect.propTypes = {
   getValue: propTypes.func,
   options: propTypes.arrayOf(propTypes.object),
 };
+
+Button.propTypes = {
+  disabled: propTypes.bool,
+  onClick: propTypes.func, 
+  testId: propTypes.string,
+}
 
 // Defaults
 
@@ -151,7 +170,14 @@ createSelect.defaultProps = {
   options: propTypes.arrayOf(propTypes.object),
 };
 
+Button.defaultProps = {
+  disabled: false,
+  onClick: () => {},
+  testId: '',
+}
+
 export {
   Input,
   Select,
+  Button,
 };
