@@ -4,9 +4,7 @@ const saveTokenLocalStorage = (token) => {
 };
 
 // Busca o valor do Token que está armazenado no localStorage
-const loadTokenLocalStorage = () => {
-  return localStorage.getItem('token');
-};
+const loadTokenLocalStorage = () => localStorage.getItem('token');
 
 // Recebe um objeto com nome do player, score e url da picture e salva no localStorage
 const saveRankingLocalStorage = (objeto) => {
@@ -22,9 +20,7 @@ const saveRankingLocalStorage = (objeto) => {
 };
 
 // Busca o array com todos os objetos/players no ranking salvos no localStorage
-const loadRankingLocalStorage = () => {
-  return JSON.parse(localStorage.getItem('ranking'));
-};
+const loadRankingLocalStorage = () => JSON.parse(localStorage.getItem('ranking'));
 
 // Salva informações do player no localStorage. Recebe como parâmetro nome, acertos,
 // score e email
@@ -38,9 +34,7 @@ const savePlayerLocalStorage = (name, assertions, score, email) => {
 };
 
 // Busca as informações do player no localStorage
-const loadPlayerLocalStorage = () => {
-  return localStorage.getItem('state');
-};
+const loadPlayerLocalStorage = () => localStorage.getItem('state');
 
 export {
   saveTokenLocalStorage,

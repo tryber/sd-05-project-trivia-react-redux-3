@@ -33,6 +33,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 PlayButton.propTypes = {
   getToken: PropTypes.instanceOf(Object).isRequired,
-}
+};
 
 export default connect(null, mapDispatchToProps)(PlayButton);
