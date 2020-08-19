@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { loadTokenLocalStorage, saveRankingLocalStorage, loadRankingLocalStorage, savePlayerLocalStorage, loadPlayerLocalStorage } from '../services/localStorage';
-
 class Game extends React.Component {
   render() {
     return (

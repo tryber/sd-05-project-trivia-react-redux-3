@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchToken } from '../actions/index';
@@ -29,5 +30,9 @@ class PlayButton extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   getToken: () => dispatch(fetchToken()),
 });
+
+PlayButton.propTypes = {
+  getToken: PropTypes.instanceOf(Object).isRequired,
+}
 
 export default connect(null, mapDispatchToProps)(PlayButton);
