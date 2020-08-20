@@ -29,14 +29,12 @@ class Header extends React.Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div>Carregando...</div>
-      );
-    }
-
+    } return (
+      <div>Carregando...</div>
+    );
   }
 }
+
 
 const mapStateToProps = (state) => ({
   questions: state.questionsReducer.questions,
