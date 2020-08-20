@@ -11,6 +11,7 @@ class Login extends React.Component {
   constructor() {
     super();
     this.startGame = this.startGame.bind(this);
+    this.Menu = this.Menu.bind(this);
     this.state = {
       name: '',
       email: '',
@@ -27,33 +28,41 @@ class Login extends React.Component {
 
     history.push('/gameplay');
   }
+  Menu(ev) {
+    ev.preventDefault();
+    const { history } = this.props;
+    history.push('/settings');
+  }
 
   render() {
     const { name, email } = this.state;
     return (
-      <form onSubmit={(ev) => { this.startGame(ev); }}>
-        <label htmlFor="player-name">
-          Nome
-          <Input
-            id="player-name"
-            type="text"
-            testId="input-player-name"
-            getValue={(val) => { this.setState({ name: val }); }}
-          />
-        </label>
-        <label htmlFor="player-email">
-          Email
-          <Input
-            id="player-email"
-            type="email"
-            testId="input-gravatar-email"
-            getValue={(val) => { this.setState({ email: val }); }}
-          />
-        </label>
-        <Button testId="btn-play" disabled={!name.length || !email.length}>
-          Jogar
-        </Button>
-      </form>
+      <div>
+        <form onSubmit={(ev) => { this.startGame(ev); }} >
+          <label htmlFor="player-name">
+            Nome
+            <Input
+              id="player-name"
+              type="text"
+              testId="input-player-name"
+              getValue={(val) => { this.setState({ name: val }); }}
+            />
+          </label>
+          <label htmlFor="player-email">
+            Email
+            <Input
+              id="player-email"
+              type="email"
+              testId="input-gravatar-email"
+              getValue={(val) => { this.setState({ email: val }); }}
+            />
+          </label>
+          <Button testId="btn-play" disabled={!name.length || !email.length}>
+            Jogar
+          </Button>
+        </form>
+        <Button testId="btn-settings" onClick={(ev) => { this.Menu(ev); }}>Configurações</Button>
+      </div>
     );
   }
 }

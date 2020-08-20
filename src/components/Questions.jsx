@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
 
-import GameHeader from './GameHeader';
-
-class Game extends React.Component {
+class Header extends React.Component {
   constructor() {
     super();
     this.state = {
       questionNumber: 0,
-    }
+    };
   }
 
   componentDidMount() {
@@ -24,7 +22,6 @@ class Game extends React.Component {
     if (questions.length) {
       return (
         <div>
-          <GameHeader />
           <button onClick={() => console.log(this.props.questions)}>teste</button>
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
@@ -50,10 +47,10 @@ const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
 });
 
-Game.propTypes = {
+Header.propTypes = {
   getQuestions: PropTypes.instanceOf(Object).isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../trivia.png';
-import Login from './Login';
+import Login from '../components/Login';
 
 class Home extends React.Component {
   render() {
@@ -8,9 +8,7 @@ class Home extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            SUA VEZ
-          </p>
+          <p>SUA VEZ</p>
           <Login />
         </header>
       </div>
