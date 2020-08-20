@@ -26,7 +26,7 @@ class Questions extends React.Component {
     correctAnswer.classList.add('green');
     for (let i = 0; i < wrongAnswers.length; i += 1) {
       wrongAnswers[i].classList.add('red');
-    };
+    }
   }
 
   renderAnswers() {
@@ -37,17 +37,15 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button type="button" data-testid={`wrong-answer-${index}`}
-                className="wrong-answer"
-                key={answer.incorrect}
-                onClick={() => this.changeColors()}
-              >
+              <button type="button" data-testid={`wrong-answer-${index}`} className="wrong-answer" key={answer.incorrect} onClick={() => this.changeColors()}>
                 {answer.incorrect}
               </button>
             );
           }
           return (
-            <button type="button" data-testid="correct-answer"
+            <button
+              type="button"
+              data-testid="correct-answer"
               key={answer.correct}
               className="correct-answer"
               onClick={() => this.changeColors()}
