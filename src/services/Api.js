@@ -33,7 +33,20 @@ const getTriviaQuestions = (token) => (
   fetch(TRIVIA.questions(token))
     .then((res) => (
       res.json()
-        .then(({ results }) => (results))
+        .then(({ results }) => {
+          const r = results.map((result) => (
+            {
+              ...result,
+              answers: [
+                ...result
+                  .incorrect_answers
+                  .map((ans) => ({ incorrect: ans })),
+                { correct: result.correct_answer },
+              ].sort(() => (.5 - Math.random())),
+            }
+          ));
+          return r;
+      })
     ))
     .catch((error) => {
       console.error(error, 'Token inválido!');
