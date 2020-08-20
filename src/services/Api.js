@@ -33,8 +33,8 @@ const getTriviaQuestions = (token) => (
   fetch(TRIVIA.questions(token))
     .then((res) => (
       res.json()
-        .then(({ results }) => {
-          const r = results.map((result) => (
+        .then(({ results }) => (
+          results.map((result) => (
             {
               ...result,
               answers: [
@@ -44,9 +44,8 @@ const getTriviaQuestions = (token) => (
                 { correct: result.correct_answer },
               ].sort(() => (0.5 - Math.random())),
             }
-          ));
-          return r;
-        })
+          ))
+        ))
     ))
     .catch((error) => {
       console.error(error, 'Token inválido!');
