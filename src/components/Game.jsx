@@ -23,7 +23,8 @@ class Game extends React.Component {
 
 const mapStateToProps = (state) => ({
   questions: state.questionsReducer.questions,
-})
+  token: state.getToken.token,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
@@ -31,6 +32,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 Game.propTypes = {
   getQuestions: PropTypes.instanceOf(Object).isRequired,
+  token: PropTypes.string.isRequired,
+  questions: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
