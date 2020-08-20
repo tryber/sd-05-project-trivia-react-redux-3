@@ -42,11 +42,11 @@ const getTriviaQuestions = (token) => (
                   .incorrect_answers
                   .map((ans) => ({ incorrect: ans })),
                 { correct: result.correct_answer },
-              ].sort(() => (.5 - Math.random())),
+              ].sort(() => (0.5 - Math.random())),
             }
           ));
           return r;
-      })
+        })
     ))
     .catch((error) => {
       console.error(error, 'Token inválido!');
