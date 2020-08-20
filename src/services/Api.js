@@ -33,7 +33,7 @@ const getTriviaToken = () => {
           Loader.stop();
           return '';
         })
-    ))
+    ));
 };
 
 const getTriviaQuestions = (token) => {
