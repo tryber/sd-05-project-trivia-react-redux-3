@@ -22,7 +22,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         src: action.src,
-      }
+      };
     default:
       return state;
   }
