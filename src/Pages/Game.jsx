@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import Questions from '../components/Questions';
 
 class Game extends React.Component {
   render() {
@@ -8,6 +9,7 @@ class Game extends React.Component {
       <div className="container-header">
         <header>
           <Header />
+          <Questions />
         </header>
       </div>
     );
