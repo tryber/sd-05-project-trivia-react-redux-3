@@ -5,6 +5,15 @@ import { fetchQuestions } from '../actions';
 
 import './Questions.css';
 
+function changeColors() {
+  const wrongAnswers = document.querySelectorAll('.wrong-answer');
+  const correctAnswer = document.querySelector('.correct-answer');
+  correctAnswer.classList.add('green');
+  for (let i = 0; i < wrongAnswers.length; i += 1) {
+    wrongAnswers[i].classList.add('red');
+  }
+}
+
 class Questions extends React.Component {
   constructor() {
     super();
@@ -12,21 +21,11 @@ class Questions extends React.Component {
       questionNumber: 0,
     };
     this.renderAnswers = this.renderAnswers.bind(this);
-    this.changeColors = this.changeColors.bind(this);
   }
 
   componentDidMount() {
     const { token, getQuestions } = this.props;
     getQuestions(token);
-  }
-
-  changeColors() {
-    const wrongAnswers = document.querySelectorAll('.wrong-answer');
-    const correctAnswer = document.querySelector('.correct-answer');
-    correctAnswer.classList.add('green');
-    for (let i = 0; i < wrongAnswers.length; i += 1) {
-      wrongAnswers[i].classList.add('red');
-    }
   }
 
   renderAnswers() {
@@ -37,7 +36,7 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button type="button" data-testid={`wrong-answer-${index}`} className="wrong-answer" key={answer.incorrect} onClick={() => this.changeColors()}>
+              <button type="button" data-testid={`wrong-answer-${index}`} className="wrong-answer" key={answer.incorrect} onClick={() => changeColors()}>
                 {answer.incorrect}
               </button>
             );
@@ -48,7 +47,7 @@ class Questions extends React.Component {
               data-testid="correct-answer"
               key={answer.correct}
               className="correct-answer"
-              onClick={() => this.changeColors()}
+              onClick={() => changeColors()}
             >
               {answer.correct}
             </button>
@@ -64,7 +63,6 @@ class Questions extends React.Component {
     if (questions.length) {
       return (
         <div>
-          <button onClick={() => console.log(this.props.questions)}>teste</button>
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
             <p data-testid="question-text">{questions[questionNumber].question}</p>
