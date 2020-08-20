@@ -1,8 +1,11 @@
 import { getTriviaToken } from '../services/Api';
+import { getProfilePicture } from '../services/Api';
 
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const RECEIVE_TOKEN_SUCCESS = 'RECEIVE_TOKEN_SUCCESS';
 export const RECEIVE_TOKEN_FAILURE = 'RECEIVE_TOKEN_FAILURE';
+export const LOGIN_USER = 'LOGIN_USER';
+export const USER_PICTURE = 'USER_PICTURE';
 
 const requestToken = () => ({
   type: REQUEST_TOKEN,
@@ -18,7 +21,12 @@ const receiveTokenFailure = (error) => ({
   error,
 });
 
-export function fetchToken() {
+const loginUser = ({ name, email }) => ({
+  type: LOGIN_USER,
+  payload: { name, email },
+});
+
+function fetchToken() {
   return (dispatch) => {
     dispatch(requestToken());
 
@@ -29,3 +37,23 @@ export function fetchToken() {
       );
   };
 }
+
+const userPicture = (src) => ({
+  type: USER_PICTURE,
+  src,
+});
+
+function fetchImage(email) {
+  return (dispatch) => {
+    getProfilePicture(email)
+    .then(
+      (src) => dispatch(userPicture(src)),
+    );
+  };
+}
+
+export {
+  fetchToken,
+  loginUser,
+  fetchImage,
+};

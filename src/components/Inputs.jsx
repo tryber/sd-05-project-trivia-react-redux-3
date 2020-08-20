@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { unique } from '../utils';
+import unique from '../utils';
 
 function createInput({ type, getValue, id, name, testId }) {
   return (
@@ -63,6 +63,19 @@ function Select(props) {
   return createSelect({ getValue, id, name, testId, options });
 }
 
+function Button(props) {
+  const { disabled, testId, onClick, children } = props;
+  return (
+    <input
+      data-testid={testId}
+      type="submit"
+      disabled={disabled}
+      onClick={onClick}
+      value={children}
+    />
+  );
+}
+
 Input.propTypes = {
   type: propTypes.string,
   cols: propTypes.number,
@@ -104,6 +117,13 @@ createSelect.propTypes = {
   id: propTypes.string,
   getValue: propTypes.func,
   options: propTypes.arrayOf(propTypes.object),
+};
+
+Button.propTypes = {
+  disabled: propTypes.bool,
+  children: propTypes.string,
+  onClick: propTypes.func,
+  testId: propTypes.string,
 };
 
 // Defaults
@@ -151,7 +171,15 @@ createSelect.defaultProps = {
   options: propTypes.arrayOf(propTypes.object),
 };
 
+Button.defaultProps = {
+  disabled: false,
+  onClick: () => {},
+  testId: '',
+  children: 'Botão',
+};
+
 export {
   Input,
   Select,
+  Button,
 };
