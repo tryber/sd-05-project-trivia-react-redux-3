@@ -33,12 +33,11 @@ class Questions extends React.Component {
     const { questions } = this.props;
     const { questionNumber } = this.state;
     return (
+      <div>
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button
-                type="button"
-                data-testid={`wrong-answer-${index}`}
+              <button type="button" data-testid={`wrong-answer-${index}`}
                 className="wrong-answer"
                 key={answer.incorrect}
                 onClick={() => this.changeColors()}
@@ -48,9 +47,7 @@ class Questions extends React.Component {
             );
           }
           return (
-            <button
-              type="button"
-              data-testid="correct-answer"
+            <button type="button" data-testid="correct-answer"
               key={answer.correct}
               className="correct-answer"
               onClick={() => this.changeColors()}
@@ -59,6 +56,7 @@ class Questions extends React.Component {
             </button>
           );
         })}
+      </div>
     );
   }
 
