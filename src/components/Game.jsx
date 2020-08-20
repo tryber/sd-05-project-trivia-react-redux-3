@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getProfilePicture } from '../services/Api';
+import PropTypes from 'prop-types';
 
 class Game extends React.Component {
   constructor() {
@@ -38,5 +39,10 @@ const mapStateToProps = (state) => ({
   token: state.getToken.token,
   user: state.loginReducer.user,
 });
+
+Game.propTypes = {
+  token: PropTypes.string.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
+}
 
 export default connect(mapStateToProps)(Game);
