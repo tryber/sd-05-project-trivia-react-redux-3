@@ -10,11 +10,43 @@ class Header extends React.Component {
       questionNumber: 0,
       alternativas: [],
     };
+    this.renderAnswers = this.renderAnswers.bind(this);
   }
 
   componentDidMount() {
     const { token, getQuestions } = this.props;
     getQuestions(token);
+  }
+
+  renderAnswers() {
+    const { questions } = this.props;
+    const { questionNumber } = this.state;
+    return (
+      <div>
+        {questions[questionNumber].answers.map((answer, index) => {
+          if (Object.keys(answer)[0] === 'incorrect') {
+            return (
+              <button
+                type="button"
+                data-testid={`wrong-answer-${index}`}
+                key={answer.incorrect}
+              >
+                {answer["incorrect"]}
+              </button>
+            );
+          }
+          return (
+            <button
+              type="button"
+              data-testid="correct-answer"
+              key={answer.correct}
+            >
+              {answer["correct"]}
+            </button>
+          );
+        })}
+      </div>
+    );
   }
 
   render() {
@@ -28,30 +60,7 @@ class Header extends React.Component {
             <p data-testid="question-category">{questions[questionNumber].category}</p>
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
-          <div>
-            {questions[questionNumber].answers.map((answer, index) => {
-              if (Object.keys(answer)[0] === 'incorrect') {
-                return (
-                  <button
-                    type="button"
-                    data-testid={`wrong-answer-${index}`}
-                    key={answer.incorrect}
-                  >
-                    {answer["incorrect"]}
-                  </button>
-                );
-              }
-              return (
-                <button
-                  type="button"
-                  data-testid="correct-answer"
-                  key={answer.correct}
-                >
-                  {answer["correct"]}
-                </button>
-              );
-            })}
-          </div>
+          {this.renderAnswers()}
         </div>
       );
     } return (
