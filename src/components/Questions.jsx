@@ -35,23 +35,21 @@ class Header extends React.Component {
                   <button
                     type="button"
                     data-testid={`wrong-answer-${index}`}
-                    key={index}
+                    key={answer.incorrect}
                   >
-                    {answer['incorrect']}
+                    {answer["incorrect"]}
                   </button>
                 );
               }
-              else {
-                return (
-                  <button
-                    type="button"
-                    data-testid="correct-answer"
-                    key={index}
-                  >
-                    {answer['correct']}
-                  </button>
-                );
-              }
+              return (
+                <button
+                  type="button"
+                  data-testid="correct-answer"
+                  key={answer.correct}
+                >
+                  {answer["correct"]}
+                </button>
+              );
             })}
           </div>
         </div>
