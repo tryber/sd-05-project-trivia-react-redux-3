@@ -8,6 +8,7 @@ class Header extends React.Component {
     super();
     this.state = {
       questionNumber: 0,
+      alternativas: [],
     };
   }
 
@@ -26,6 +27,32 @@ class Header extends React.Component {
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
             <p data-testid="question-text">{questions[questionNumber].question}</p>
+          </div>
+          <div>
+            {questions[questionNumber].answers.map((answer, index) => {
+              if (Object.keys(answer)[0] === 'incorrect') {
+                return (
+                  <button
+                    type="button"
+                    data-testid={`wrong-answer-${index}`}
+                    key={index}
+                  >
+                    {answer['incorrect']}
+                  </button>
+                );
+              }
+              else {
+                return (
+                  <button
+                    type="button"
+                    data-testid="correct-answer"
+                    key={index}
+                  >
+                    {answer['correct']}
+                  </button>
+                );
+              }
+            })}
           </div>
         </div>
       );
