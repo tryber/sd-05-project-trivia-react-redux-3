@@ -45,7 +45,7 @@ class Login extends React.Component {
               id="player-name"
               type="text"
               testId="input-player-name"
-              getValue={(val) => {this.setState({ name: val }); }}
+              getValue={ (val) => {this.setState({ name: val }); }}
             />
           </label>
           <label htmlFor="player-email">
@@ -61,7 +61,7 @@ class Login extends React.Component {
             Jogar
           </Button>
         </form>
-        <Button testId="btn-settings" onClick={(ev) => { this.Menu(ev);}}>Configurações</Button>
+        <Button testId="btn-settings" onClick={(ev) => { this.Menu(ev); }}>Configurações</Button>
       </div>
     );
   }
