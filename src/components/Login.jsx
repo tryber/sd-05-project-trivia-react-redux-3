@@ -69,9 +69,8 @@ class Login extends React.Component {
             Jogar
           </Button>
         </form>
-        <Button testId="btn-settings" onClick={(ev) => { this.Menu(ev);}}>
-          Configurações
-        </Button>
+        <Button testId="btn-settings" onClick={(ev) => { this.Menu(ev); }}>
+          Configurações </Button>
       </div>
     );
   }
