@@ -6,6 +6,13 @@ import { fetchQuestions } from '../actions';
 import GameHeader from './GameHeader';
 
 class Game extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      questionNumber: 0,
+    }
+  }
+
   componentDidMount() {
     const { token, getQuestions } = this.props;
     getQuestions(token);
@@ -13,20 +20,24 @@ class Game extends React.Component {
 
   render() {
     const { questions } = this.props;
-    return (
-      <div>
-        <GameHeader />
-        <button onClick={() => console.log(this.props.questions)}>teste</button>
+    const { questionNumber } = this.state;
+    if (questions.length) {
+      return (
         <div>
-          {questions.map((question) => (
-            <div>
-              <p data-testid="question-category">{question.category}</p>
-              <p data-testid="question-text">{question.question}</p>
-            </div>
-          ))}
+          <GameHeader />
+          <button onClick={() => console.log(this.props.questions)}>teste</button>
+          <div>
+            <p data-testid="question-category">{questions[questionNumber].category}</p>
+            <p data-testid="question-text">{questions[questionNumber].question}</p>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div>Carregando...</div>
+      );
+    }
+
   }
 }
 
