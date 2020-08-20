@@ -31,7 +31,7 @@ class Header extends React.Component {
                 data-testid={`wrong-answer-${index}`}
                 key={answer.incorrect}
               >
-                {answer["incorrect"]}
+                {answer.incorrect}
               </button>
             );
           }
@@ -41,7 +41,7 @@ class Header extends React.Component {
               data-testid="correct-answer"
               key={answer.correct}
             >
-              {answer["correct"]}
+              {answer.correct}
             </button>
           );
         })}
