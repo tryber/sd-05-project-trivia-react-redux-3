@@ -12,10 +12,19 @@ class Game extends React.Component {
   }
 
   render() {
+    const { questions } = this.props;
     return (
       <div>
         <GameHeader />
         <button onClick={() => console.log(this.props.questions)}>teste</button>
+        <div>
+          {questions.map((question) => (
+            <div>
+              <p data-testid="question-category">{question.category}</p>
+              <p data-testid="question-text">{question.question}</p>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
