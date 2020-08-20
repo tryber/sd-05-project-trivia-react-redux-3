@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchImage } from '../actions';
 import { saveTokenLocalStorage } from '../services/localStorage';
 
-class Game extends React.Component {
+class Header extends React.Component {
   componentDidMount() {
     const { token, getImage } = this.props;
     const { email } = this.props.user;
@@ -31,7 +31,6 @@ class Game extends React.Component {
     );
   }
 }
-
 const mapDispatchToProps = (dispatch) => ({
   getImage: (email) => dispatch(fetchImage(email)),
 });
@@ -42,11 +41,11 @@ const mapStateToProps = (state) => ({
   src: state.loginReducer.src,
 });
 
-Game.propTypes = {
+Header.propTypes = {
   token: PropTypes.string.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   src: PropTypes.string.isRequired,
   getImage: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
