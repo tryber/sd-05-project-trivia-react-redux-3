@@ -3,19 +3,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
 
-class Header extends React.Component {
+import './Questions.css';
+
+class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
       questionNumber: 0,
-      alternativas: [],
     };
     this.renderAnswers = this.renderAnswers.bind(this);
+    this.changeColors = this.changeColors.bind(this);
   }
 
   componentDidMount() {
     const { token, getQuestions } = this.props;
     getQuestions(token);
+  }
+
+  changeColors() {
+    const wrongAnswers = document.querySelectorAll('.wrong-answer');
+    const correctAnswer = document.querySelector('.correct-answer');
+    correctAnswer.classList.add('green');
+    for (let i = 0; i < wrongAnswers.length; i += 1) {
+      wrongAnswers[i].classList.add('red');
+    };
   }
 
   renderAnswers() {
@@ -29,7 +40,9 @@ class Header extends React.Component {
               <button
                 type="button"
                 data-testid={`wrong-answer-${index}`}
+                className="wrong-answer"
                 key={answer.incorrect}
+                onClick={() => this.changeColors()}
               >
                 {answer.incorrect}
               </button>
@@ -40,6 +53,8 @@ class Header extends React.Component {
               type="button"
               data-testid="correct-answer"
               key={answer.correct}
+              className="correct-answer"
+              onClick={() => this.changeColors()}
             >
               {answer.correct}
             </button>
@@ -79,10 +94,10 @@ const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
 });
 
-Header.propTypes = {
+Questions.propTypes = {
   getQuestions: PropTypes.instanceOf(Object).isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Questions);
