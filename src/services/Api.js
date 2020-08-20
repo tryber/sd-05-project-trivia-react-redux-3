@@ -54,14 +54,14 @@ const getTriviaQuestions = (token) => {
                 { correct: result.correct_answer },
               ].sort(() => (0.5 - Math.random())),
             }
-          ))
+          ));
         })
     ))
     .catch((error) => {
       Loader.stop();
       console.error(error, 'Token inválido!');
       return [];
-    })
+    });
 };
 
 const getProfilePicture = (email) => (

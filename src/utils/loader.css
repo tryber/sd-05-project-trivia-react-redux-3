@@ -1,4 +1,4 @@
-#_spinner {
+._spinner {
   animation: spin 2s linear infinite;
   border: 8px solid #f3f3f3;
   border-radius: 50%;
@@ -8,7 +8,7 @@
   z-index: 11;
 }
 
-#_loader{
+._loader {
   align-items: center;
   background-color: #00000080;
   display: flex;
@@ -21,9 +21,9 @@
   z-index: 10;
 }
 
-@-webkit-keyframes spin {
+@keyframes spin {
 
-  0% { 
+  0% {
     transform: rotate(0deg);
   }
 
@@ -33,7 +33,7 @@
 }
 
 @keyframes spin {
-  
+
   0% {
     transform: rotate(0deg);
   }
@@ -49,28 +49,28 @@
   position: relative;
 }
 
-@-webkit-keyframes _animatebottom {
+@keyframes _animatebottom {
 
   from {
-    bottom:-100px;
-    opacity:0;
+    bottom: -100px;
+    opacity: 0;
   }
 
   to {
-    bottom:0px;
-    opacity:1;
+    bottom: 0;
+    opacity: 1;
   }
 }
 
 @keyframes _animatebottom {
 
   from {
-    bottom:-100px;
-    opacity:0;
+    bottom: -100px;
+    opacity: 0;
   }
 
   to {
-    bottom:0;
-    opacity:1;
+    bottom: 0;
+    opacity: 1;
   }
 }

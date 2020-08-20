@@ -10,22 +10,25 @@ let cOverflow = 'auto';
 
 function init() {
   cOverflow = body.style.overflow || 'auto';
-  if(!document.querySelector('#_style')) {
+  if (!document.querySelector('._style')) {
+    const elStyle = document.createElement('style');
+    elStyle.className = '_style';
     document.querySelector('HEAD')
-      .appendChild(document.createElement('style'))
+      .appendChild(elStyle)
       .innerText = style;
   }
 }
 
 function start() {
   body.style.overflow = 'hidden';
-  if(!document.querySelector('#_loader')) {
+  if (!document.querySelector('._loader')) {
     let el = body.insertBefore(document.createElement('div'), body.firstChild);
-    el.id = '_loader';
+    el.className = '_loader';
     el.style.backgroundColor = bgColor;
     el = el.appendChild(document.createElement('div'));
-    el.id = '_spinner';
-    el.style.width = el.style.height = size;
+    el.className = '_spinner';
+    el.style.width = size;
+    el.style.height = size;
     el.style.borderColor = baseColor;
     el.style.borderTopColor = wheelColor;
     el.style.borderWidth = thickness;
@@ -34,16 +37,16 @@ function start() {
 
 function stop() {
   body.style.overflow = cOverflow;
-  if (document.querySelector('#_loader')) {
-    body.removeChild(document.querySelector('#_loader'));
+  if (document.querySelector('._loader')) {
+    body.removeChild(document.querySelector('._loader'));
   }
 }
 
-function setSize (s) {
+function setSize(s) {
   size = s;
-} 
+}
 
-function setThickness (t) {
+function setThickness(t) {
   thickness = t;
 }
 
@@ -60,4 +63,4 @@ export default {
   setColor,
   start,
   stop,
-}
+};
