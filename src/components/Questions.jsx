@@ -13,6 +13,8 @@ class Questions extends React.Component {
     };
     this.renderAnswers = this.renderAnswers.bind(this);
     this.changeColors = this.changeColors.bind(this);
+    this.renderIncorrectButton = this.renderIncorrectButton.bind(this);
+    this.renderCorrectButton = this.renderCorrectButton.bind(this);
   }
 
   componentDidMount() {
@@ -26,7 +28,35 @@ class Questions extends React.Component {
     correctAnswer.classList.add('green');
     for (let i = 0; i < wrongAnswers.length; i += 1) {
       wrongAnswers[i].classList.add('red');
-    };
+    }
+  }
+
+  renderIncorrectButton() {
+    return (
+      <button
+        type="button"
+        data-testid={`wrong-answer-${index}`}
+        className="wrong-answer"
+        key={answer.incorrect}
+        onClick={() => this.changeColors()}
+      >
+        {answer.incorrect}
+      </button>
+    );
+  }
+
+  renderCorrectButton() {
+    return (
+      <button
+        type="button"
+        data-testid="correct-answer"
+        key={answer.correct}
+        className="correct-answer"
+        onClick={() => this.changeColors()}
+      >
+        {answer.correct}
+      </button>
+    );
   }
 
   renderAnswers() {
@@ -36,29 +66,9 @@ class Questions extends React.Component {
       <div>
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
-            return (
-              <button
-                type="button"
-                data-testid={`wrong-answer-${index}`}
-                className="wrong-answer"
-                key={answer.incorrect}
-                onClick={() => this.changeColors()}
-              >
-                {answer.incorrect}
-              </button>
-            );
+            {this.renderIncorrectButton()}
           }
-          return (
-            <button
-              type="button"
-              data-testid="correct-answer"
-              key={answer.correct}
-              className="correct-answer"
-              onClick={() => this.changeColors()}
-            >
-              {answer.correct}
-            </button>
-          );
+          {this.renderCorrectButton()}
         })}
       </div>
     );
