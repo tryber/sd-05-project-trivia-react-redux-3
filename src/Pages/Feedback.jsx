@@ -11,6 +11,12 @@ class Feedback extends React.Component {
     history.push('/');
   }
 
+  goToRanking(ev) {
+    ev.preventDefault();
+    const { history } = this.props;
+    history.push('/ranking');
+  }
+
   render() {
     return (
       <div className="container-header">
@@ -18,10 +24,17 @@ class Feedback extends React.Component {
           <Header />
         </header>
           <Button
-            data-testid="btn-play-again"
+            testId="btn-play-again"
             onClick={(ev) => { this.backToHome(ev); }}
           >
             Jogar novamente
+          </Button>
+          <Button
+            type="button"
+            testId="btn-ranking"
+            onClick={(ev) => { this.goToRanking(ev); }}
+          >
+            Ver Ranking
           </Button>
       </div>
     );
