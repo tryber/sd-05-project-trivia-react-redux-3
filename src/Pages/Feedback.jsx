@@ -7,6 +7,22 @@ import { Button } from '../components/Inputs';
 import { loadPlayerLocalStorage } from '../services/localStorage';
 
 class Feedback extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      score: 0,
+      assertions: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      score: loadPlayerLocalStorage().score,
+      assertions: loadPlayerLocalStorage().assertions,
+    });
+  }
+
+
   backToHome(ev) {
     ev.preventDefault();
     const { history } = this.props;
@@ -44,14 +60,15 @@ class Feedback extends React.Component {
   }
 
   render() {
+    const { score, assertions } = this.state;
     return (
       <div className="container-header">
         <Header />
         {this.renderButtonJogarNovamente()}
         {this.renderButtonRank()}
         <div>
-          <p data-testid="feedback-total-score">{loadPlayerLocalStorage().score}</p>
-          <p data-testid="feedback-total-question">{loadPlayerLocalStorage().assertions}</p>
+          <p data-testid="feedback-total-score">{score}</p>
+          <p data-testid="feedback-total-question">{assertions}</p>
         </div>
       </div>
     );
