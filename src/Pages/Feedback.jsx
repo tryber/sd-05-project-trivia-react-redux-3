@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
-import { Button } from '../components/Inputs';
-
 class Feedback extends React.Component {
   backToHome(ev) {
     ev.preventDefault();
@@ -16,12 +14,13 @@ class Feedback extends React.Component {
       <div className="container-header">
         <header>
           <Header />
-          <Button
+          <button
+            type="button"
             data-testid="btn-play-again"
             onClick={(ev) => { this.backToHome(ev); }}
           >
             Jogar novamente
-          </Button>
+          </button>
         </header>
       </div>
     );
