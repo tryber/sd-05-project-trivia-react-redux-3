@@ -1,4 +1,5 @@
 import md5 from 'crypto-js/md5';
+import Loader from '../utils/loader';
 
 const TRIVIA = {
   URL: 'https://opentdb.com',
@@ -17,24 +18,33 @@ const GRAVATAR = {
   },
 };
 
-const getTriviaToken = () => (
-  fetch(TRIVIA.requestToken())
+const getTriviaToken = () => {
+  Loader.init();
+  Loader.start();
+  return fetch(TRIVIA.requestToken())
     .then((response) => (
       response.json()
-        .then(({ token }) => (token))
+        .then(({ token }) => {
+          Loader.stop();
+          return token;
+        })
         .catch((error) => {
           console.error(error, 'Erro na requisição');
+          Loader.stop();
           return '';
         })
-    ))
-);
+    ));
+};
 
-const getTriviaQuestions = (token) => (
-  fetch(TRIVIA.questions(token))
+const getTriviaQuestions = (token) => {
+  Loader.init();
+  Loader.start();
+  return fetch(TRIVIA.questions(token))
     .then((res) => (
       res.json()
         .then(({ results }) => {
-          const r = results.map((result) => (
+          Loader.stop();
+          return results.map((result) => (
             {
               ...result,
               answers: [
@@ -45,14 +55,14 @@ const getTriviaQuestions = (token) => (
               ].sort(() => (0.5 - Math.random())),
             }
           ));
-          return r;
         })
     ))
     .catch((error) => {
+      Loader.stop();
       console.error(error, 'Token inválido!');
       return [];
-    })
-);
+    });
+};
 
 const getProfilePicture = (email) => (
   new Promise((resolve) => {

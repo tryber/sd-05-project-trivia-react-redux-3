@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../trivia.png';
 import Login from '../components/Login';
 
+
 class Home extends React.Component {
   render() {
     return (
