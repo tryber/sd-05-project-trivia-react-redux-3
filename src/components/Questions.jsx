@@ -28,7 +28,7 @@ class Questions extends React.Component {
     this.timer = setInterval(() => {
       this.time -= 1;
       if (this.time === 0) {
-        this.setState({ questionNumber: questionNumber + 1 })
+        this.setState({ questionNumber: questionNumber + 1 });
       }
     }, 1000);
   }
@@ -50,10 +50,7 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <Button
-                testId={`wrong-answer-${index}`}
-                key={answer.incorrect}
-              >
+              <Button testId={`wrong-answer-${index}`} key={answer.incorrect}>
                 {answer.incorrect}
               </Button>
             );

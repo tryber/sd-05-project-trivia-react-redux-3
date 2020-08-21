@@ -38,8 +38,8 @@ const addScore = (score) => {
   localStorage.setItem(
     'state',
     JSON.stringify(state),
-  ); 
-}
+  );
+};
 
 // Busca as informações do player no localStorage
 const loadPlayerLocalStorage = () => localStorage.getItem('state');
