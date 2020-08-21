@@ -50,7 +50,12 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <Button testId={`wrong-answer-${index}`} key={answer.incorrect}>
+              <Button
+                data-testid={`wrong-answer-${index}`}
+                key={answer.incorrect}
+                className="wrong-answer"
+                onClick={() => changeColors()}
+              >
                 {answer.incorrect}
               </Button>
             );
@@ -86,6 +91,7 @@ class Questions extends React.Component {
           </div>
           {this.renderAnswers()}
           <Button
+            disabled={!document.querySelectorAll('.red').length}
             testId="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
