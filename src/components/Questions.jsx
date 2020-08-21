@@ -57,8 +57,7 @@ class Questions extends React.Component {
   render() {
     const { questions, history } = this.props;
     const { questionNumber } = this.state;
-    console.log(questions.length)
-    if (questions.length){
+    if (questions.length) {
       return (
         <div>
           <div>
@@ -66,11 +65,11 @@ class Questions extends React.Component {
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
           {this.renderAnswers()}
-          <Button testId="btn-next" 
+          <Button
+            testId="btn-next" 
             onClick={() => {
-            (questionNumber< questions.length -1) ? 
-            this.setState({ questionNumber:questionNumber +1 }): 
-            history.push('/feedback')
+              (questionNumber < questions.length -1) ? 
+              this.setState({ questionNumber : questionNumber +1 }): history.push('/feedback')
           }}>Próxima</Button>
         </div>
       );
