@@ -63,7 +63,7 @@ class Questions extends React.Component {
                 testId={`wrong-answer-${index}`}
                 key={answer.incorrect}
                 className="wrong-answer"
-                onClick={() => {changeColors() || this.setState({ disableButton: false })}}
+                onClick={() => changeColors() || this.setState({ disableButton: false })}
               >
                 {answer.incorrect}
               </Button>
