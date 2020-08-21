@@ -13,6 +13,7 @@ class Questions extends React.Component {
     super();
     this.state = {
       questionNumber: 0,
+      disableButton: true,
     };
     this.renderAnswers = this.renderAnswers.bind(this);
   }
@@ -30,7 +31,7 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button type="button" data-testid={`wrong-answer-${index}`} key={answer.incorrect} className="wrong-answer" onClick={() => changeColors()}>
+              <button type="button" data-testid={`wrong-answer-${index}`} key={answer.incorrect} className="wrong-answer" onClick={() => changeColors() || this.setState({ disableButton: false })}>
                 {answer.incorrect}
               </button>
             );
@@ -41,7 +42,10 @@ class Questions extends React.Component {
               data-testid="correct-answer"
               key={answer.correct}
               className="correct-answer"
-              onClick={() => changeColors()}
+              onClick={() => {
+                this.setState({ disableButton: false });
+                changeColors();
+              }}
             >
               {answer.correct}
             </button>
@@ -52,7 +56,7 @@ class Questions extends React.Component {
   }
   render() {
     const { questions, history } = this.props;
-    const { questionNumber } = this.state;
+    const { questionNumber, disableButton } = this.state;
     if (questions.length) {
       return (
         <div>
@@ -62,11 +66,11 @@ class Questions extends React.Component {
           </div>
           {this.renderAnswers()}
           <Button
-            disabled={!document.querySelectorAll('.red').length}
+            disabled={disableButton}
             testId="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
-                return this.setState({ questionNumber: questionNumber + 1 });
+                return this.setState({ questionNumber: questionNumber + 1, disableButton: true });
               }
               return history.push('/feedback');
             }}
