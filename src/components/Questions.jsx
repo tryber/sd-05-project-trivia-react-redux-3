@@ -31,9 +31,9 @@ class Questions extends React.Component {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
               <button
-              type="button"
-              data-testid={`wrong-answer-${index}`}
-              key={answer.incorrect}
+                type="button"
+                data-testid={`wrong-answer-${index}`}
+                key={answer.incorrect}
               >
                 {answer.incorrect}
               </button>
@@ -54,12 +54,11 @@ class Questions extends React.Component {
       </div>
     );
   }
-  
   render() {
     const { questions, history } = this.props;
     const { questionNumber } = this.state;
     console.log(questions.length)
-    if (questions.length) {
+    if (questions.length){
       return (
         <div>
           <div>
@@ -67,9 +66,10 @@ class Questions extends React.Component {
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
           {this.renderAnswers()}
-          <Button testId="btn-next" onClick={() => {
-            (questionNumber< questions.length-1) ? 
-            this.setState({questionNumber:questionNumber+1}): 
+          <Button testId="btn-next" 
+            onClick={() => {
+            (questionNumber< questions.length -1) ? 
+            this.setState({ questionNumber:questionNumber +1 }): 
             history.push('/feedback')
           }}>Próxima</Button>
         </div>
@@ -94,6 +94,7 @@ Questions.propTypes = {
   getQuestions: PropTypes.instanceOf(Object).isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Questions));
