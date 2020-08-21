@@ -9,15 +9,15 @@ import { addScore } from '../services/localStorage';
 import './Questions.css';
 import changeColors from '../services/changeColors';
 
-const RESET = { disableButton: true, showNext: true };
+const ENABLED = { disableButton: true, showNext: true };
+const DISABLED = { disableButton: false, showNext: false };
 
 class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
+      ...DISABLED,
       questionNumber: 0,
-      disableButton: false,
-      showNext: false,
       time: 30,
     };
     this.renderAnswers = this.renderAnswers.bind(this);
@@ -33,7 +33,7 @@ class Questions extends React.Component {
       const { time } = this.state;
       this.setState({ time: Math.max(time - 1, 0) });
       if (time === 0) {
-        this.setState(RESET);
+        this.setState(ENABLED);
       }
     }, 1000);
   }
@@ -52,7 +52,7 @@ class Questions extends React.Component {
         break;
     }
     changeColors();
-    this.setState({ disableButton: true, showNext: true });
+    this.setState(ENABLED);
   }
 
   renderTimer() {
@@ -74,7 +74,7 @@ class Questions extends React.Component {
                 key={answer.incorrect}
                 className="wrong-answer"
                 disabled={disableButton}
-                onClick={() => changeColors() || this.setState(RESET)}
+                onClick={() => changeColors() || this.setState(ENABLED)}
               >
                 {answer.incorrect}
               </Button>
@@ -110,9 +110,8 @@ class Questions extends React.Component {
             onClick={() => {
               (questionNumber < questions.length - 1) ?
                 this.setState({
+                  ...DISABLED,
                   questionNumber: questionNumber + 1,
-                  disableButton: false,
-                  showNext: false,
                   time: 30,
                 }) : history.push('/feedback');
             }}
