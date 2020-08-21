@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchImage } from '../actions';
+import { loadPlayerLocalStorage } from '../services/localStorage';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -22,7 +23,9 @@ class Header extends React.Component {
         />
         <p data-testid="header-player-name">{name}</p>
         <p>{email}</p>
-        <p data-testid="header-score">0</p>
+        <p data-testid="header-score">
+          {loadPlayerLocalStorage().score}
+        </p>
       </header>
     );
   }

@@ -24,12 +24,12 @@ class Login extends React.Component {
   startGame(ev) {
     ev.preventDefault();
     const { getToken, setUser, history } = this.props;
-    const { name, email } = this.state;
+    const { name, email: gravatarEmail } = this.state;
     setUser(this.state);
     getToken()
       .then(({ token }) => {
         saveTokenLocalStorage(token);
-        savePlayerLocalStorage({ name, assertions: 0, score: 0, email });
+        savePlayerLocalStorage({ name, assertions: 0, score: 0, gravatarEmail });
       })
       .then(() => {
         history.push('/gameplay');

@@ -24,10 +24,10 @@ const loadRankingLocalStorage = () => JSON.parse(localStorage.getItem('ranking')
 
 // Salva informações do player no localStorage. Recebe como parâmetro nome, acertos,
 // score e email
-const savePlayerLocalStorage = ({ name, assertions, score, email }) => {
+const savePlayerLocalStorage = ({ name, assertions, score, gravatarEmail }) => {
   localStorage.setItem(
     'state',
-    JSON.stringify({ name, assertions, score, email }),
+    JSON.stringify({ name, assertions, score, gravatarEmail }),
   );
 };
 
@@ -42,7 +42,7 @@ const addScore = (score) => {
 };
 
 // Busca as informações do player no localStorage
-const loadPlayerLocalStorage = () => localStorage.getItem('state');
+const loadPlayerLocalStorage = () => JSON.parse(localStorage.getItem('state'));
 
 export {
   saveTokenLocalStorage,
