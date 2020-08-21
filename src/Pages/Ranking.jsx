@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '../components/Inputs';
 
 class Ranking extends React.Component {
@@ -23,5 +24,8 @@ class Ranking extends React.Component {
     );
   }
 }
+Feedback.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default Ranking;

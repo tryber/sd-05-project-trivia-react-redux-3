@@ -10,7 +10,7 @@ class Game extends React.Component {
         <header>
           <Header />
         </header>
-          <Questions />
+        <Questions />
       </div>
     );
   }
