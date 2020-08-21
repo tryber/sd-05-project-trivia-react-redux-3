@@ -50,10 +50,8 @@ class Feedback extends React.Component {
         {this.renderButtonJogarNovamente()}
         {this.renderButtonRank()}
         <div>
-          <span>Placar Final: </span>
-          <span data-testid="feedback-total-score">{loadPlayerLocalStorage().score}</span>
-          <span>Acertos: </span>
-          <span data-testid="feedback-total-question">{loadPlayerLocalStorage().assertions}</span>
+          <p data-testid="feedback-total-score">{loadPlayerLocalStorage().score}</p>
+          <p data-testid="feedback-total-question">{loadPlayerLocalStorage().assertions}</p>
         </div>
       </div>
     );
