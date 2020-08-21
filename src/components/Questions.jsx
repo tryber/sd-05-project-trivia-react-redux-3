@@ -4,15 +4,7 @@ import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
 
 import './Questions.css';
-
-function changeColors() {
-  const wrongAnswers = document.querySelectorAll('.wrong-answer');
-  const correctAnswer = document.querySelector('.correct-answer');
-  correctAnswer.classList.add('green');
-  for (let i = 0; i < wrongAnswers.length; i += 1) {
-    wrongAnswers[i].classList.add('red');
-  }
-}
+import changeColors from '../services/changeColors';
 
 class Questions extends React.Component {
   constructor() {
@@ -42,13 +34,7 @@ class Questions extends React.Component {
             );
           }
           return (
-            <button
-              type="button"
-              data-testid="correct-answer"
-              key={answer.correct}
-              className="correct-answer"
-              onClick={() => changeColors()}
-            >
+            <button type="button" data-testid="correct-answer" key={answer.correct} className="correct-answer" onClick={() => changeColors()}>
               {answer.correct}
             </button>
           );
