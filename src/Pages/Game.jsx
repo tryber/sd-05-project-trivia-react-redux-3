@@ -9,8 +9,8 @@ class Game extends React.Component {
       <div className="container-header">
         <header>
           <Header />
-          <Questions />
         </header>
+          <Questions />
       </div>
     );
   }

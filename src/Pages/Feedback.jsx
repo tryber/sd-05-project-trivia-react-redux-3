@@ -16,13 +16,13 @@ class Feedback extends React.Component {
       <div className="container-header">
         <header>
           <Header />
+        </header>
           <Button
             data-testid="btn-play-again"
             onClick={(ev) => { this.backToHome(ev); }}
           >
             Jogar novamente
           </Button>
-        </header>
       </div>
     );
   }
