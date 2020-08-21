@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../components/Inputs'
+import { Button } from '../components/Inputs';
 
 class Ranking extends React.Component {
   backToHome(ev) {
@@ -10,10 +10,16 @@ class Ranking extends React.Component {
   render() {
     return (
       <div>
-      <h2 data-testid="ranking-title">Ranking</h2>
-        <Button testId="btn-play-again" onClick={(ev) => { this.backToHome(ev); }}>
-          Home </Button >
-        </div>
+        <h2 data-testid="ranking-title">Ranking</h2>
+        <Button
+          testId="btn-play-again"
+          onClick={(ev) => {
+            this.backToHome(ev);
+          }}
+        >
+          Home{' '}
+        </Button>
+      </div>
     );
   }
 }
