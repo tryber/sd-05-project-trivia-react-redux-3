@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
+import {Button} from './Inputs'
 
-class Header extends React.Component {
+class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
       questionNumber: 0,
-      alternativas: [],
     };
+    this.nextEvent = this.nextEvent.bind(this);
     this.renderAnswers = this.renderAnswers.bind(this);
   }
 
@@ -18,6 +20,7 @@ class Header extends React.Component {
     getQuestions(token);
   }
 
+  
   renderAnswers() {
     const { questions } = this.props;
     const { questionNumber } = this.state;
@@ -27,9 +30,9 @@ class Header extends React.Component {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
               <button
-                type="button"
-                data-testid={`wrong-answer-${index}`}
-                key={answer.incorrect}
+              type="button"
+              data-testid={`wrong-answer-${index}`}
+              key={answer.incorrect}
               >
                 {answer.incorrect}
               </button>
@@ -37,9 +40,9 @@ class Header extends React.Component {
           }
           return (
             <button
-              type="button"
-              data-testid="correct-answer"
-              key={answer.correct}
+            type="button"
+            data-testid="correct-answer"
+            key={answer.correct}
             >
               {answer.correct}
             </button>
@@ -48,19 +51,31 @@ class Header extends React.Component {
       </div>
     );
   }
-
+  nextEvent(){
+    const {history, questions} = this.props
+    const {questionNumber} = this.state
+    (questionNumber< questions.length-1) ? 
+      this.setState({questionNumber:questionNumber+1}): 
+      history.push('/feedback')
+  }
+  
   render() {
-    const { questions } = this.props;
+    const { questions, history } = this.props;
     const { questionNumber } = this.state;
+    console.log(questions.length)
     if (questions.length) {
       return (
         <div>
-          <button onClick={() => console.log(this.props.questions)}>teste</button>
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
           {this.renderAnswers()}
+          <Button testId="btn-next" onClick={() => {
+            (questionNumber< questions.length-1) ? 
+            this.setState({questionNumber:questionNumber+1}): 
+            history.push('/feedback')
+          }}>Próxima</Button>
         </div>
       );
     } return (
@@ -79,10 +94,10 @@ const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
 });
 
-Header.propTypes = {
+Questions.propTypes = {
   getQuestions: PropTypes.instanceOf(Object).isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Questions));
