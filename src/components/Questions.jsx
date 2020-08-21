@@ -14,11 +14,13 @@ class Questions extends React.Component {
     super();
     this.state = {
       questionNumber: 0,
-      disableButton: true,
+      disableButton: false,
+      showNext: false,
+      time: 30,
     };
     this.renderAnswers = this.renderAnswers.bind(this);
     this.computeScore = this.computeScore.bind(this);
-    this.time = 30;
+    this.renderTimer = this.renderTimer.bind(this);
     this.timer = {};
   }
 
@@ -26,35 +28,40 @@ class Questions extends React.Component {
     const { token, getQuestions } = this.props;
     getQuestions(token);
     this.timer = setInterval(() => {
-      this.time -= 1;
-      if (this.time === 0) {
-        this.setState({ disableButton: true });
+      const { time } = this.state;
+      this.setState({ time: time - 1 });
+      if (time === 0) {
+        this.setState({ disableButton: true, showNext: true });
       }
     }, 1000);
   }
 
-  componentDidUpdate() {
-    this.time = 30;
-  }
-
   computeScore({ difficulty }) {
+    const { time } = this.state;
     switch (difficulty) {
       case 'easy':
-        addScore(10 * this.time);
+        addScore(10 * time);
         break;
       case 'medium':
-        addScore(10 * this.time * 2);
+        addScore(10 * time * 2);
         break;
       default:
-        addScore(10 * this.time * 3);
+        addScore(10 * time * 3);
         break;
     }
     changeColors();
   }
 
+  renderTimer() {
+    const { time } = this.state;
+    return (
+      <div>{time}</div>
+    )
+  }
+
   renderAnswers() {
     const { questions } = this.props;
-    const { questionNumber } = this.state;
+    const { questionNumber, disableButton } = this.state;
     return (
         questions[questionNumber].answers.map((answer, index) => (
           Object.keys(answer)[0] === 'incorrect' ?
@@ -63,7 +70,11 @@ class Questions extends React.Component {
                 testId={`wrong-answer-${index}`}
                 key={answer.incorrect}
                 className="wrong-answer"
-                onClick={() => changeColors() || this.setState({ disableButton: false })}
+                disabled={disableButton}
+                onClick={() => changeColors() || this.setState({
+                  disableButton: true,
+                  showNext: true,
+                })}
               >
                 {answer.incorrect}
               </Button>
@@ -72,8 +83,9 @@ class Questions extends React.Component {
                 testId="correct-answer"
                 key={answer.correct}
                 className="correct-answer"
+                disabled={disableButton}
                 onClick={() => {
-                  this.setState({ disableButton: false });
+                  this.setState({ disableButton: true, showNext: true });
                   this.computeScore(questions[questionNumber]);
                 }}
               >
@@ -86,20 +98,26 @@ class Questions extends React.Component {
 
   render() {
     const { questions, history } = this.props;
-    const { questionNumber, disableButton } = this.state;
+    const { questionNumber, showNext } = this.state;
     if (questions.length) {
       return (
         <div>
+          {this.renderTimer()}
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
           {this.renderAnswers()}
-          {(!disableButton) ? <Button
+          {(showNext) ? <Button
             testId="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
-                return this.setState({ questionNumber: questionNumber + 1, disableButton: true });
+                return this.setState({
+                  questionNumber: questionNumber + 1,
+                  disableButton: false,
+                  showNext: false,
+                  time: 30,
+                });
               }
               return history.push('/feedback');
             }}
