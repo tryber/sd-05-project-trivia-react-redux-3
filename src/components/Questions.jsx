@@ -42,13 +42,13 @@ class Questions extends React.Component {
     const { time } = this.state;
     switch (difficulty) {
       case 'easy':
-        addScore(10 * time);
+        addScore(10 + time);
         break;
       case 'medium':
-        addScore(10 * time * 2);
+        addScore(10 + time * 2);
         break;
       default:
-        addScore(10 * time * 3);
+        addScore(10 + time * 3);
         break;
     }
     changeColors();
@@ -56,7 +56,12 @@ class Questions extends React.Component {
   }
 
   renderTimer() {
-    const { time } = this.state;
+    const { time, disableButton } = this.state;
+    if (disableButton) {
+      return (
+        <div></div>
+      );
+    }
     return (
       <div>{time}</div>
     );
@@ -66,30 +71,30 @@ class Questions extends React.Component {
     const { questions } = this.props;
     const { questionNumber, disableButton } = this.state;
     return (
-        questions[questionNumber].answers.map((answer, index) => (
-          Object.keys(answer)[0] === 'incorrect' ?
-            (
-              <Button
-                testId={`wrong-answer-${index}`}
-                key={answer.incorrect}
-                className="wrong-answer"
-                disabled={disableButton}
-                onClick={() => changeColors() || this.setState(ENABLED)}
-              >
-                {answer.incorrect}
-              </Button>
-            ) : (
-              <Button
-                testId="correct-answer"
-                key={answer.correct}
-                className="correct-answer"
-                disabled={disableButton}
-                onClick={() => { this.computeScore(questions[questionNumber]); }}
-              >
-                {answer.correct}
-              </Button>
-            )
-        ))
+      questions[questionNumber].answers.map((answer, index) => (
+        Object.keys(answer)[0] === 'incorrect' ?
+          (
+            <Button
+              testId={`wrong-answer-${index}`}
+              key={answer.incorrect}
+              className="wrong-answer"
+              disabled={disableButton}
+              onClick={() => changeColors() || this.setState(ENABLED)}
+            >
+              {answer.incorrect}
+            </Button>
+          ) : (
+            <Button
+              testId="correct-answer"
+              key={answer.correct}
+              className="correct-answer"
+              disabled={disableButton}
+              onClick={() => { this.computeScore(questions[questionNumber]); }}
+            >
+              {answer.correct}
+            </Button>
+          )
+      ))
     );
   }
 
