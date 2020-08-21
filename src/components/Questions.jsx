@@ -65,8 +65,7 @@ class Questions extends React.Component {
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
           {this.renderAnswers()}
-          <Button
-            disabled={disableButton}
+          {(!disableButton) ? <Button
             testId="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
@@ -76,7 +75,7 @@ class Questions extends React.Component {
             }}
           >
             Próxima
-          </Button>
+          </Button> : ''}
         </div>
       );
     }
