@@ -42,13 +42,13 @@ class Questions extends React.Component {
     const { time } = this.state;
     switch (difficulty) {
       case 'easy':
-        addScore(10 + time);
+        addScore(10 + (time));
         break;
       case 'medium':
-        addScore(10 + time * 2);
+        addScore(10 + (time * 2));
         break;
       default:
-        addScore(10 + time * 3);
+        addScore(10 + (time * 3));
         break;
     }
     changeColors();
@@ -59,7 +59,7 @@ class Questions extends React.Component {
     const { time, disableButton } = this.state;
     if (disableButton) {
       return (
-        <div></div>
+        <div />
       );
     }
     return (
