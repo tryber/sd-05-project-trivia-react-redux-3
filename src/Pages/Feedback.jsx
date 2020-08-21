@@ -4,6 +4,8 @@ import Header from '../components/Header';
 
 import { Button } from '../components/Inputs';
 
+import { loadPlayerLocalStorage } from '../services/localStorage';
+
 class Feedback extends React.Component {
   backToHome(ev) {
     ev.preventDefault();
@@ -17,26 +19,40 @@ class Feedback extends React.Component {
     history.push('/ranking');
   }
 
+  renderButtonJogarNovamente() {
+    return (
+      <button
+        type="button"
+        data-testid="btn-play-again"
+        onClick={(ev) => { this.backToHome(ev); }}
+      >
+        Jogar novamente
+      </button>
+    );
+  }
+
+  renderButtonRank() {
+    return (
+      <Button
+        type="button"
+        testId="btn-ranking"
+        onClick={(ev) => { this.goToRanking(ev); }}
+      >
+        Ver Ranking
+      </Button>
+    );
+  }
+
   render() {
     return (
       <div className="container-header">
-        <header>
-          <Header />
-          <button
-            type="button"
-            data-testid="btn-play-again"
-            onClick={(ev) => { this.backToHome(ev); }}
-          >
-            Jogar novamente
-          </button>
-          <Button
-            type="button"
-            testId="btn-ranking"
-            onClick={(ev) => { this.goToRanking(ev); }}
-          >
-            Ver Ranking
-          </Button>
-        </header>
+        <Header />
+        {this.renderButtonJogarNovamente()}
+        {this.renderButtonRank()}
+        <div>
+          <span>Placar Final: </span><span data-testid="feedback-total-score">{loadPlayerLocalStorage().score}</span>
+          <span>Acertos: </span><span data-testid="feedback-total-question">{loadPlayerLocalStorage().assertions}</span>
+        </div>
       </div>
     );
   }
