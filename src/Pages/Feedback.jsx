@@ -22,21 +22,20 @@ class Feedback extends React.Component {
       <div className="container-header">
         <header>
           <Header />
-          <button
-            type="button"
-            data-testid="btn-play-again"
-            onClick={(ev) => { this.backToHome(ev); }}
-          >
-            Jogar novamente
-          </button>
-          <Button
-            type="button"
-            testId="btn-ranking"
-            onClick={(ev) => { this.goToRanking(ev); }}
-          >
-            Ver Ranking
-          </Button>
         </header>
+        <Button
+          testId="btn-play-again"
+          onClick={(ev) => { this.backToHome(ev); }}
+        >
+          Jogar novamente
+        </Button>
+        <Button
+          type="button"
+          testId="btn-ranking"
+          onClick={(ev) => { this.goToRanking(ev); }}
+        >
+          Ver Ranking
+        </Button>
       </div>
     );
   }
