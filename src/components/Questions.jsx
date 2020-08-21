@@ -4,74 +4,122 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
 import { Button } from './Inputs';
+import { addScore } from '../services/localStorage';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
+
+const ENABLED = { disableButton: true, showNext: true };
+const DISABLED = { disableButton: false, showNext: false };
 
 class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
+      ...DISABLED,
       questionNumber: 0,
-      disableButton: true,
+      time: 30,
     };
     this.renderAnswers = this.renderAnswers.bind(this);
+    this.computeScore = this.computeScore.bind(this);
+    this.renderTimer = this.renderTimer.bind(this);
+    this.timer = {};
   }
 
   componentDidMount() {
     const { token, getQuestions } = this.props;
     getQuestions(token);
+    this.timer = setInterval(() => {
+      const { time } = this.state;
+      this.setState({ time: Math.max(time - 1, 0) });
+      if (time === 0) {
+        this.setState(ENABLED);
+      }
+    }, 1000);
+  }
+
+  computeScore({ difficulty }) {
+    const { time } = this.state;
+    switch (difficulty) {
+      case 'easy':
+        addScore(10 + (time));
+        break;
+      case 'medium':
+        addScore(10 + (time * 2));
+        break;
+      default:
+        addScore(10 + (time * 3));
+        break;
+    }
+    changeColors();
+    this.setState(ENABLED);
+  }
+
+  renderTimer() {
+    const { time, disableButton } = this.state;
+    if (disableButton) {
+      return (
+        <div />
+      );
+    }
+    return (
+      <div>{time}</div>
+    );
   }
 
   renderAnswers() {
     const { questions } = this.props;
-    const { questionNumber } = this.state;
+    const { questionNumber, disableButton } = this.state;
     return (
-      <div>
-        {questions[questionNumber].answers.map((answer, index) => {
-          if (Object.keys(answer)[0] === 'incorrect') {
-            return (
-              <button type="button" data-testid={`wrong-answer-${index}`} key={answer.incorrect} className="wrong-answer" onClick={() => changeColors() || this.setState({ disableButton: false })}>
-                {answer.incorrect}
-              </button>
-            );
-          }
-          return (
-            <button
-              type="button"
-              data-testid="correct-answer"
+      questions[questionNumber].answers.map((answer, index) => (
+        Object.keys(answer)[0] === 'incorrect' ?
+          (
+            <Button
+              testId={`wrong-answer-${index}`}
+              key={answer.incorrect}
+              className="wrong-answer"
+              disabled={disableButton}
+              onClick={() => changeColors() || this.setState(ENABLED)}
+            >
+              {answer.incorrect}
+            </Button>
+          ) : (
+            <Button
+              testId="correct-answer"
               key={answer.correct}
               className="correct-answer"
-              onClick={() => {
-                this.setState({ disableButton: false });
-                changeColors();
-              }}
+              disabled={disableButton}
+              onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
               {answer.correct}
-            </button>
-          );
-        })}
-      </div>
+            </Button>
+          )
+      ))
     );
   }
+
   render() {
     const { questions, history } = this.props;
-    const { questionNumber, disableButton } = this.state;
+    const { questionNumber, showNext } = this.state;
     if (questions.length) {
       return (
         <div>
+          {this.renderTimer()}
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
           {this.renderAnswers()}
-          {(!disableButton) ? <Button
+          {(showNext) ? <Button
             testId="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
-                return this.setState({ questionNumber: questionNumber + 1, disableButton: true });
-              }
-              return history.push('/feedback');
+                this.setState({
+                  ...DISABLED,
+                  questionNumber: questionNumber + 1,
+                  time: 30,
+                });
+              } else history.push('/feedback');
             }}
           >
             Próxima
