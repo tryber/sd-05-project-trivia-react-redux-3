@@ -66,19 +66,21 @@ class Questions extends React.Component {
           </div>
           {this.renderAnswers()}
           <Button
-            testId="btn-next" 
+            testId="btn-next"
             onClick={() => {
-              (questionNumber < questions.length -1) ? 
-              this.setState({ questionNumber : questionNumber +1 }): history.push('/feedback')
-          }}>Próxima</Button>
+              questionNumber < questions.length - 1
+                ? this.setState({ questionNumber: questionNumber + 1 })
+                : history.push('/feedback');
+            }}
+          >
+            Próxima
+          </Button>
         </div>
       );
-    } return (
-      <div>Carregando...</div>
-    );
+    }
+    return <div>Carregando...</div>;
   }
 }
-
 
 const mapStateToProps = (state) => ({
   questions: state.questionsReducer.questions,
@@ -96,5 +98,6 @@ Questions.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Questions));
-
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Questions)
+);
