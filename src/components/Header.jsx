@@ -5,15 +5,24 @@ import { fetchImage } from '../actions';
 import { loadPlayerLocalStorage } from '../services/localStorage';
 
 class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      placar: 0,
+    }
+  }
   componentDidMount() {
     const { getImage } = this.props;
     const { email } = this.props.user;
     getImage(email);
+
+    this.setState({ placar: loadPlayerLocalStorage().score });
   }
 
   render() {
     const { name, email } = this.props.user;
     const { src } = this.props;
+    const { placar } = this.state;
     return (
       <header>
         <img
@@ -24,7 +33,7 @@ class Header extends React.Component {
         <p data-testid="header-player-name">{name}</p>
         <p>{email}</p>
         <p data-testid="header-score">
-          {loadPlayerLocalStorage().score}
+          {placar}
         </p>
       </header>
     );
