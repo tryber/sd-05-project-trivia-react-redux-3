@@ -30,13 +30,7 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button
-                type="button"
-                data-testid={`wrong-answer-${index}`}
-                key={answer.incorrect}
-                className="wrong-answer"
-                onClick={() => changeColors()}
-              >
+              <button type="button" data-testid={`wrong-answer-${index}`} key={answer.incorrect} className="wrong-answer" onClick={() => changeColors()}>
                 {answer.incorrect}
               </button>
             );
