@@ -68,9 +68,9 @@ class Questions extends React.Component {
           <Button
             testId="btn-next"
             onClick={() => {
-              questionNumber < questions.length - 1
-                ? this.setState({ questionNumber: questionNumber + 1 })
-                : history.push('/feedback');
+              if (questionNumber < questions.length - 1)
+                return this.setState({ questionNumber: questionNumber + 1 })
+                else history.push('/feedback');
             }}
           >
             Próxima
@@ -98,6 +98,4 @@ Questions.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Questions)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Questions));
