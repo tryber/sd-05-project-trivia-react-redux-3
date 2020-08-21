@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../components/Inputs'
 
 class Ranking extends React.Component {
   backToHome(ev) {
