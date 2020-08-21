@@ -24,7 +24,7 @@ class Ranking extends React.Component {
     );
   }
 }
-Feedback.propTypes = {
+Ranking.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
 };
 
