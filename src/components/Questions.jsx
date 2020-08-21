@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
-import {Button} from './Inputs'
+import { Button } from './Inputs';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
@@ -14,7 +14,6 @@ class Questions extends React.Component {
     this.state = {
       questionNumber: 0,
     };
-    this.nextEvent = this.nextEvent.bind(this);
     this.renderAnswers = this.renderAnswers.bind(this);
   }
 
@@ -23,7 +22,6 @@ class Questions extends React.Component {
     getQuestions(token);
   }
 
-  
   renderAnswers() {
     const { questions } = this.props;
     const { questionNumber } = this.state;
@@ -55,13 +53,6 @@ class Questions extends React.Component {
         })}
       </div>
     );
-  }
-  nextEvent(){
-    const {history, questions} = this.props
-    const {questionNumber} = this.state
-    (questionNumber< questions.length-1) ? 
-      this.setState({questionNumber:questionNumber+1}): 
-      history.push('/feedback')
   }
   
   render() {
