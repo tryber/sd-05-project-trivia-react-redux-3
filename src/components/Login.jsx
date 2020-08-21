@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 
 import { fetchToken, loginUser } from '../actions/index';
 import { Button, Input } from './Inputs';
-import { saveTokenLocalStorage } from '../services/localStorage';
+import {
+  saveTokenLocalStorage,
+  savePlayerLocalStorage,
+} from '../services/localStorage';
 
 class Login extends React.Component {
   constructor() {
@@ -21,13 +24,18 @@ class Login extends React.Component {
   startGame(ev) {
     ev.preventDefault();
     const { getToken, setUser, history } = this.props;
-
+    const { name, email } = this.state;
     setUser(this.state);
-    getToken();
-    saveTokenLocalStorage('teste');
-
-    history.push('/gameplay');
+    getToken()
+      .then(({ token }) => {
+        saveTokenLocalStorage(token);
+        savePlayerLocalStorage({ name, assertions: 0, score: 0, email });
+      })
+      .then(() => {
+        history.push('/gameplay');
+      });
   }
+
   Menu(ev) {
     ev.preventDefault();
     const { history } = this.props;
@@ -57,7 +65,7 @@ class Login extends React.Component {
               getValue={(val) => { this.setState({ email: val }); }}
             />
           </label>
-          <Button testId="btn-play" disabled={!name.length || !email.length}>
+          <Button testId="btn-play" isButton={false} disabled={!name.length || !email.length}>
             Jogar
           </Button>
         </form>

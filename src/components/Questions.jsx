@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
 import { Button } from './Inputs';
+import { addScore } from '../services/localStorage';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
@@ -15,11 +16,30 @@ class Questions extends React.Component {
       questionNumber: 0,
     };
     this.renderAnswers = this.renderAnswers.bind(this);
+    this.computeScore = this.computeScore.bind(this);
+    this.time = 30;
+    this.timer = {};
   }
 
   componentDidMount() {
     const { token, getQuestions } = this.props;
+    const { questionNumber } = this.state;
     getQuestions(token);
+    this.timer = setInterval(() => {
+      this.time -= 1;
+      if (this.time === 0) {
+        this.setState({ questionNumber: questionNumber + 1 })
+      }
+    }, 1000);
+  }
+
+  componentDidUpdate() {
+    this.time = 30;
+  }
+
+  computeScore({ difficulty }) {
+    const scr = difficulty === 'easy' ? 1 : difficulty === 'medium' ? 2 : 3;
+    addScore(10 * this.time * scr);
   }
 
   renderAnswers() {
@@ -30,33 +50,36 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button
-                type="button"
-                data-testid={`wrong-answer-${index}`}
+              <Button
+                testId={`wrong-answer-${index}`}
                 key={answer.incorrect}
               >
                 {answer.incorrect}
-              </button>
+              </Button>
             );
           }
           return (
-            <button
-              type="button"
-              data-testid="correct-answer"
+            <Button
+              testId="correct-answer"
               key={answer.correct}
               className="correct-answer"
-              onClick={() => changeColors()}
+              onClick={() => {
+                changeColors();
+                this.computeScore(questions[questionNumber]);
+              }}
             >
               {answer.correct}
-            </button>
+            </Button>
           );
         })}
       </div>
     );
   }
+
   render() {
     const { questions, history } = this.props;
     const { questionNumber } = this.state;
+    console.log(this.time);
     if (questions.length) {
       return (
         <div>
