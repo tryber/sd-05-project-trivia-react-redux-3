@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
 
-class Header extends React.Component {
+import './Questions.css';
+import changeColors from '../services/changeColors';
+
+class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
       questionNumber: 0,
-      alternativas: [],
     };
     this.renderAnswers = this.renderAnswers.bind(this);
   }
@@ -26,11 +28,7 @@ class Header extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button
-                type="button"
-                data-testid={`wrong-answer-${index}`}
-                key={answer.incorrect}
-              >
+              <button type="button" data-testid={`wrong-answer-${index}`} className="wrong-answer" key={answer.incorrect} onClick={() => changeColors()}>
                 {answer.incorrect}
               </button>
             );
@@ -40,6 +38,8 @@ class Header extends React.Component {
               type="button"
               data-testid="correct-answer"
               key={answer.correct}
+              className="correct-answer"
+              onClick={() => changeColors()}
             >
               {answer.correct}
             </button>
@@ -55,7 +55,6 @@ class Header extends React.Component {
     if (questions.length) {
       return (
         <div>
-          <button onClick={() => console.log(this.props.questions)}>teste</button>
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
             <p data-testid="question-text">{questions[questionNumber].question}</p>
@@ -79,10 +78,10 @@ const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
 });
 
-Header.propTypes = {
+Questions.propTypes = {
   getQuestions: PropTypes.instanceOf(Object).isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Questions);
