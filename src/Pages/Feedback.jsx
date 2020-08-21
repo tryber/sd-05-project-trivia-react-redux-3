@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 import { Button } from '../components/Inputs';
@@ -26,4 +27,9 @@ class Feedback extends React.Component {
     );
   }
 }
+
+Feedback.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
+};
+
 export default Feedback;
