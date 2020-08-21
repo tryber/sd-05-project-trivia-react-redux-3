@@ -14,7 +14,6 @@ class Header extends React.Component {
   render() {
     const { name, email } = this.props.user;
     const { src } = this.props;
-    const { placar } = this.state;
     return (
       <header>
         <img
