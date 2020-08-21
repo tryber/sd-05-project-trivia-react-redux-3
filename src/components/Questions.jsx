@@ -113,7 +113,7 @@ class Questions extends React.Component {
                   ...DISABLED,
                   questionNumber: questionNumber + 1,
                   time: 30,
-                }); 
+                });
               } else history.push('/feedback');
             }}
           >
