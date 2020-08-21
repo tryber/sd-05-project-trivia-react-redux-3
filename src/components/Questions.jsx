@@ -34,7 +34,13 @@ class Questions extends React.Component {
             );
           }
           return (
-            <button type="button" data-testid="correct-answer" key={answer.correct} className="correct-answer" onClick={() => changeColors()}>
+            <button
+              type="button"
+              data-testid="correct-answer"
+              key={answer.correct}
+              className="correct-answer"
+              onClick={() => changeColors()}
+            >
               {answer.correct}
             </button>
           );
