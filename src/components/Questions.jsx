@@ -38,8 +38,17 @@ class Questions extends React.Component {
   }
 
   computeScore({ difficulty }) {
-    const scr = difficulty === 'easy' ? 1 : difficulty === 'medium' ? 2 : 3;
-    addScore(10 * this.time * scr);
+    switch (difficulty) {
+      case 'easy':
+        addScore(10 * this.time);
+        break;
+      case 'medium':
+        addScore(10 * this.time * 2);
+        break;
+      default:
+        addScore(10 * this.time * 3);
+        break;
+    }    
     changeColors();
   }
 
@@ -58,8 +67,7 @@ class Questions extends React.Component {
               >
                 {answer.incorrect}
               </Button>
-            ) : 
-            (
+            ) : (
               <Button
                 testId="correct-answer"
                 key={answer.correct}
@@ -70,7 +78,7 @@ class Questions extends React.Component {
               </Button>
             )
         ))
-    )
+    );
   }
 
   render() {
