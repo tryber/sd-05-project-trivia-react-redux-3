@@ -10,18 +10,10 @@ class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      score: 0,
-      assertions: 0,
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
       score: loadPlayerLocalStorage().score,
       assertions: loadPlayerLocalStorage().assertions,
-    });
+    };
   }
-
 
   backToHome(ev) {
     ev.preventDefault();
