@@ -34,6 +34,8 @@ class Questions extends React.Component {
                 type="button"
                 data-testid={`wrong-answer-${index}`}
                 key={answer.incorrect}
+                className="wrong-answer"
+                onClick={() => changeColors()}
               >
                 {answer.incorrect}
               </button>
@@ -66,6 +68,7 @@ class Questions extends React.Component {
           </div>
           {this.renderAnswers()}
           <Button
+            disabled={!document.querySelectorAll('.red').length}
             testId="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
