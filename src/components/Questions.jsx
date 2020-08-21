@@ -40,48 +40,42 @@ class Questions extends React.Component {
   computeScore({ difficulty }) {
     const scr = difficulty === 'easy' ? 1 : difficulty === 'medium' ? 2 : 3;
     addScore(10 * this.time * scr);
+    changeColors();
   }
 
   renderAnswers() {
     const { questions } = this.props;
     const { questionNumber } = this.state;
     return (
-      <div>
-        {questions[questionNumber].answers.map((answer, index) => {
-          if (Object.keys(answer)[0] === 'incorrect') {
-            return (
+        questions[questionNumber].answers.map((answer, index) => (
+          Object.keys(answer)[0] === 'incorrect' ?
+            (
               <Button
-                data-testid={`wrong-answer-${index}`}
+                testId={`wrong-answer-${index}`}
                 key={answer.incorrect}
                 className="wrong-answer"
-                onClick={() => changeColors()}
+                onClick={() => { changeColors(); }}
               >
                 {answer.incorrect}
               </Button>
-            );
-          }
-          return (
-            <Button
-              testId="correct-answer"
-              key={answer.correct}
-              className="correct-answer"
-              onClick={() => {
-                changeColors();
-                this.computeScore(questions[questionNumber]);
-              }}
-            >
-              {answer.correct}
-            </Button>
-          );
-        })}
-      </div>
-    );
+            ) : 
+            (
+              <Button
+                testId="correct-answer"
+                key={answer.correct}
+                className="correct-answer"
+                onClick={() => { this.computeScore(questions[questionNumber]); }}
+              >
+                {answer.correct}
+              </Button>
+            )
+        ))
+    )
   }
 
   render() {
     const { questions, history } = this.props;
     const { questionNumber } = this.state;
-    console.log(this.time);
     if (questions.length) {
       return (
         <div>
@@ -91,7 +85,7 @@ class Questions extends React.Component {
           </div>
           {this.renderAnswers()}
           <Button
-            disabled={!document.querySelectorAll('.red').length}
+            // disabled={} refazer a lógica
             testId="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
