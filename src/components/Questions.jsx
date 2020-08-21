@@ -48,7 +48,7 @@ class Questions extends React.Component {
       default:
         addScore(10 * this.time * 3);
         break;
-    }    
+    }
     changeColors();
   }
 
