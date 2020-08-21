@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions';
+import { Button } from './Inputs';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
@@ -28,7 +30,11 @@ class Questions extends React.Component {
         {questions[questionNumber].answers.map((answer, index) => {
           if (Object.keys(answer)[0] === 'incorrect') {
             return (
-              <button type="button" data-testid={`wrong-answer-${index}`} className="wrong-answer" key={answer.incorrect} onClick={() => changeColors()}>
+              <button
+                type="button"
+                data-testid={`wrong-answer-${index}`}
+                key={answer.incorrect}
+              >
                 {answer.incorrect}
               </button>
             );
@@ -48,9 +54,8 @@ class Questions extends React.Component {
       </div>
     );
   }
-
   render() {
-    const { questions } = this.props;
+    const { questions, history } = this.props;
     const { questionNumber } = this.state;
     if (questions.length) {
       return (
@@ -60,14 +65,23 @@ class Questions extends React.Component {
             <p data-testid="question-text">{questions[questionNumber].question}</p>
           </div>
           {this.renderAnswers()}
+          <Button
+            testId="btn-next"
+            onClick={() => {
+              if (questionNumber < questions.length - 1) {
+                return this.setState({ questionNumber: questionNumber + 1 });
+              }
+              return history.push('/feedback');
+            }}
+          >
+            Próxima
+          </Button>
         </div>
       );
-    } return (
-      <div>Carregando...</div>
-    );
+    }
+    return <div>Carregando...</div>;
   }
 }
-
 
 const mapStateToProps = (state) => ({
   questions: state.questionsReducer.questions,
@@ -82,6 +96,7 @@ Questions.propTypes = {
   getQuestions: PropTypes.instanceOf(Object).isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Questions);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Questions));
