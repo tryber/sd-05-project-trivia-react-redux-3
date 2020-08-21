@@ -9,6 +9,8 @@ import { addScore } from '../services/localStorage';
 import './Questions.css';
 import changeColors from '../services/changeColors';
 
+const RESET = { disableButton: true, showNext: true };
+
 class Questions extends React.Component {
   constructor() {
     super();
@@ -29,9 +31,9 @@ class Questions extends React.Component {
     getQuestions(token);
     this.timer = setInterval(() => {
       const { time } = this.state;
-      this.setState({ time: time - 1 });
+      this.setState({ time: Math.max(time - 1, 0) });
       if (time === 0) {
-        this.setState({ disableButton: true, showNext: true });
+        this.setState(RESET);
       }
     }, 1000);
   }
@@ -50,13 +52,14 @@ class Questions extends React.Component {
         break;
     }
     changeColors();
+    this.setState({ disableButton: true, showNext: true });
   }
 
   renderTimer() {
     const { time } = this.state;
     return (
       <div>{time}</div>
-    )
+    );
   }
 
   renderAnswers() {
@@ -71,10 +74,7 @@ class Questions extends React.Component {
                 key={answer.incorrect}
                 className="wrong-answer"
                 disabled={disableButton}
-                onClick={() => changeColors() || this.setState({
-                  disableButton: true,
-                  showNext: true,
-                })}
+                onClick={() => changeColors() || this.setState(RESET)}
               >
                 {answer.incorrect}
               </Button>
@@ -84,10 +84,7 @@ class Questions extends React.Component {
                 key={answer.correct}
                 className="correct-answer"
                 disabled={disableButton}
-                onClick={() => {
-                  this.setState({ disableButton: true, showNext: true });
-                  this.computeScore(questions[questionNumber]);
-                }}
+                onClick={() => { this.computeScore(questions[questionNumber]); }}
               >
                 {answer.correct}
               </Button>
