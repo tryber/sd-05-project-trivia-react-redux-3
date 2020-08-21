@@ -14,7 +14,7 @@ class Feedback extends React.Component {
   goToRanking(ev) {
     ev.preventDefault();
     const { history } = this.props;
-    history.push('/ranking')
+    history.push('/ranking');
   }
 
   render() {
@@ -32,7 +32,7 @@ class Feedback extends React.Component {
           <Button
             type="button"
             testId="btn-ranking"
-            onClick={(ev) => { this.goToRanking(ev) }}
+            onClick={(ev) => { this.goToRanking(ev); }}
           >
             Ver Ranking
           </Button>
