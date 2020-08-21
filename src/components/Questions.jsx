@@ -68,9 +68,10 @@ class Questions extends React.Component {
           <Button
             testId="btn-next"
             onClick={() => {
-              if (questionNumber < questions.length - 1)
+              if (questionNumber < questions.length - 1){
                 return this.setState({ questionNumber: questionNumber + 1 })
-                else history.push('/feedback');
+              }
+              history.push('/feedback');
             }}
           >
             Próxima
