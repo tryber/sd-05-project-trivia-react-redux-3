@@ -6,6 +6,7 @@ export const RECEIVE_TOKEN_FAILURE = 'RECEIVE_TOKEN_FAILURE';
 export const LOGIN_USER = 'LOGIN_USER';
 export const USER_PICTURE = 'USER_PICTURE';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+export const UPDATE_SCORE = 'UPDATE_SCORE';
 
 const requestToken = () => ({
   type: REQUEST_TOKEN,
@@ -24,6 +25,11 @@ const receiveTokenFailure = (error) => ({
 const loginUser = ({ name, email }) => ({
   type: LOGIN_USER,
   payload: { name, email },
+});
+
+const updateScore = (score) => ({
+  type: UPDATE_SCORE,
+  score,
 });
 
 function fetchToken() {
@@ -71,4 +77,5 @@ export {
   loginUser,
   fetchImage,
   fetchQuestions,
+  updateScore,
 };
