@@ -32,6 +32,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 Home.propTypes = {
   restartScore: PropTypes.instanceOf(Object).isRequired,
-}
+};
 
 export default connect(null, mapDispatchToProps)(Home);

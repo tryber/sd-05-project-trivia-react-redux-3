@@ -1,8 +1,6 @@
 import {
   LOGIN_USER,
   USER_PICTURE,
-  USER_SCORE,
-  NEW_SCORE,
 } from '../actions/index';
 
 const INITIAL_STATE = {

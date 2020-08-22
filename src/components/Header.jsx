@@ -44,6 +44,7 @@ Header.propTypes = {
   user: PropTypes.instanceOf(Object).isRequired,
   src: PropTypes.string.isRequired,
   getImage: PropTypes.instanceOf(Object).isRequired,
+  score: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
