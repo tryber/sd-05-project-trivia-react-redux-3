@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions, updateScore } from '../actions';
 import { Button } from './Inputs';
-import { addScore } from '../services/localStorage';
+import { addScore, resetScore } from '../services/localStorage';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
@@ -29,6 +29,7 @@ class Questions extends React.Component {
   componentDidMount() {
     const { token, getQuestions } = this.props;
     getQuestions(token);
+    resetScore();
     this.timer = setInterval(() => {
       const { time } = this.state;
       this.setState({ time: Math.max(time - 1, 0) });

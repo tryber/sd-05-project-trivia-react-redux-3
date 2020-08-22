@@ -31,6 +31,16 @@ const savePlayerLocalStorage = ({ name, assertions, score, gravatarEmail }) => {
   );
 };
 
+const resetScore = () => {
+  const state = JSON.parse(localStorage.getItem('state'));
+  state.score = 0;
+  state.assertions = 0;
+  localStorage.setItem(
+    'state',
+    JSON.stringify(state),
+  );
+};
+
 const addScore = (score) => {
   const state = JSON.parse(localStorage.getItem('state'));
   state.score += score;
@@ -52,4 +62,5 @@ export {
   savePlayerLocalStorage,
   loadPlayerLocalStorage,
   addScore,
+  resetScore,
 };
