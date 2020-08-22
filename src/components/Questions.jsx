@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchQuestions } from '../actions';
+import { fetchQuestions , userScore } from '../actions';
 import { Button } from './Inputs';
 import { addScore } from '../services/localStorage';
 
@@ -40,15 +40,19 @@ class Questions extends React.Component {
 
   computeScore({ difficulty }) {
     const { time } = this.state;
+    const { getScore } = this.props;
     switch (difficulty) {
       case 'easy':
         addScore(10 + (time));
+        getScore(10 + (time));
         break;
       case 'medium':
         addScore(10 + (time * 2));
+        getScore(10 + (time * 2));
         break;
       default:
         addScore(10 + (time * 3));
+        getScore(10 + (time * 3));
         break;
     }
     changeColors();
@@ -138,6 +142,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
+  getScore: (score) => dispatch(userScore(score)),
 });
 
 Questions.propTypes = {

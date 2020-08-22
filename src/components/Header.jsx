@@ -13,7 +13,7 @@ class Header extends React.Component {
 
   render() {
     const { name, email } = this.props.user;
-    const { src } = this.props;
+    const { src, score } = this.props;
     return (
       <header>
         <img
@@ -24,7 +24,7 @@ class Header extends React.Component {
         <p data-testid="header-player-name">{name}</p>
         <p>{email}</p>
         <p data-testid="header-score">
-          {loadPlayerLocalStorage().score}
+          {score}
         </p>
       </header>
     );
@@ -38,6 +38,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   user: state.loginReducer.user,
   src: state.loginReducer.src,
+  score: state.loginReducer.score,
 });
 
 Header.propTypes = {

@@ -6,6 +6,7 @@ export const RECEIVE_TOKEN_FAILURE = 'RECEIVE_TOKEN_FAILURE';
 export const LOGIN_USER = 'LOGIN_USER';
 export const USER_PICTURE = 'USER_PICTURE';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+export const USER_SCORE = 'USER_SCORE';
 
 const requestToken = () => ({
   type: REQUEST_TOKEN,
@@ -43,6 +44,16 @@ const userPicture = (src) => ({
   src,
 });
 
+const _valor = (valor) => {
+  let soma = 0;
+  return parseFloat(soma + valor);
+}
+
+const userScore = (value) => ({
+  type: USER_SCORE,
+  score: _valor(value),
+});
+
 function fetchImage(email) {
   return (dispatch) => {
     getProfilePicture(email)
@@ -71,4 +82,5 @@ export {
   loginUser,
   fetchImage,
   fetchQuestions,
+  userScore,
 };
