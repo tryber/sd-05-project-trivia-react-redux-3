@@ -38,23 +38,27 @@ class Questions extends React.Component {
     }, 1000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   computeScore({ difficulty }) {
     const { time } = this.state;
     const { setScore } = this.props;
+    let score = 0;
     switch (difficulty) {
       case 'easy':
-        addScore(10 + (time));
-        setScore(10 + (time));
+        score = (10 + (time));
         break;
       case 'medium':
-        addScore(10 + (time * 2));
-        setScore(10 + (time * 2));
+        score = (10 + (time * 2));
         break;
       default:
-        addScore(10 + (time * 3));
-        setScore(10 + (time * 3));
+        score = (10 + (time * 3));
         break;
     }
+    addScore(score);
+    setScore(score);
     changeColors();
     this.setState(ENABLED);
   }
