@@ -150,6 +150,7 @@ Questions.propTypes = {
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  getScore: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Questions));

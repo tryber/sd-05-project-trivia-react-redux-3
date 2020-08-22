@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchImage } from '../actions';
-import { loadPlayerLocalStorage } from '../services/localStorage';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -38,7 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   user: state.loginReducer.user,
   src: state.loginReducer.src,
-  score: state.loginReducer.score,
+  score: state.scoreReducer.score,
 });
 
 Header.propTypes = {

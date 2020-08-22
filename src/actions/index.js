@@ -7,6 +7,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const USER_PICTURE = 'USER_PICTURE';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const USER_SCORE = 'USER_SCORE';
+export const NEW_SCORE = 'NEW_SCORE';
 
 const requestToken = () => ({
   type: REQUEST_TOKEN,
@@ -44,14 +45,13 @@ const userPicture = (src) => ({
   src,
 });
 
-const _valor = (valor) => {
-  let soma = 0;
-  return parseFloat(soma + valor);
-}
-
-const userScore = (value) => ({
+const userScore = (score) => ({
   type: USER_SCORE,
-  score: _valor(value),
+  score,
+});
+
+const newScore = () => ({
+  type: NEW_SCORE,
 });
 
 function fetchImage(email) {
@@ -83,4 +83,5 @@ export {
   fetchImage,
   fetchQuestions,
   userScore,
+  newScore,
 };
