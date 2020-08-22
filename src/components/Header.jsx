@@ -33,9 +33,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-      user: state.loginReducer.user,
-      src: state.loginReducer.src,
-      score: state.questionsReducer.score || 0,
+  user: state.loginReducer.user,
+  src: state.loginReducer.src,
+  score: state.questionsReducer.score,
 });
 
 Header.propTypes = {

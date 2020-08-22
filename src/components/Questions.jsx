@@ -40,19 +40,19 @@ class Questions extends React.Component {
 
   computeScore({ difficulty }) {
     const { time } = this.state;
-    const { updateScore } = this.props;
+    const { setScore } = this.props;
     switch (difficulty) {
       case 'easy':
         addScore(10 + (time));
-        updateScore(10 + (time));
+        setScore(10 + (time));
         break;
       case 'medium':
         addScore(10 + (time * 2));
-        updateScore(10 + (time * 2));
+        setScore(10 + (time * 2));
         break;
       default:
         addScore(10 + (time * 3));
-        updateScore(10 + (time * 3));
+        setScore(10 + (time * 3));
         break;
     }
     changeColors();
@@ -142,12 +142,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
-  updateScore: (score) => dispatch(updateScore(score)),
+  setScore: (score) => dispatch(updateScore(score)),
 });
 
 Questions.propTypes = {
   getQuestions: PropTypes.func.isRequired,
-  updateScore: PropTypes.func.isRequired,
+  setScore: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
