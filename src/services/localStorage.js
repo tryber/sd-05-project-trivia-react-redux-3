@@ -27,7 +27,7 @@ const loadRankingLocalStorage = () => JSON.parse(localStorage.getItem('ranking')
 const savePlayerLocalStorage = ({ name, assertions, score, gravatarEmail }) => {
   localStorage.setItem(
     'state',
-    JSON.stringify({player: { name, assertions, score, gravatarEmail }}),
+    JSON.stringify({ player: { name, assertions, score, gravatarEmail } }),
   );
 };
 
