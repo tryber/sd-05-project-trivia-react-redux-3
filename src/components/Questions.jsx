@@ -86,7 +86,7 @@ class Questions extends React.Component {
             <Button
               testId={`wrong-answer-${index}`}
               key={answer.incorrect}
-              className="wrong-answer"
+              className="btn wrong-answer"
               disabled={disableButton}
               onClick={() => changeColors() || this.setState(ENABLED)}
             >
@@ -96,7 +96,7 @@ class Questions extends React.Component {
             <Button
               testId="correct-answer"
               key={answer.correct}
-              className="correct-answer"
+              className="btn correct-answer"
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
