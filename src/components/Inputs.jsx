@@ -129,7 +129,7 @@ createSelect.propTypes = {
 Button.propTypes = {
   disabled: propTypes.bool,
   isButton: propTypes.bool,
-  children: propTypes.oneOfType([ propTypes.string, propTypes.element ]),
+  children: propTypes.oneOfType([propTypes.string, propTypes.element]),
   onClick: propTypes.func,
   testId: propTypes.string,
   className: propTypes.string,

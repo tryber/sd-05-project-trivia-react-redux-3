@@ -35,7 +35,7 @@
 
 .navigation {
   display: flex;
-  margin-top: 32px
+  margin-top: 32px;
 }
 
 .btn {
@@ -48,11 +48,18 @@
 
 .btn-play {
   border-left: 1px dotted black;
-  width: 196px;
   border-radius: 15px 0 0 15px;
+  width: 196px;
 }
 
 .btn-settings {
   border-left: 1px dotted black;
   border-radius: 0 15px 15px 0;
+}
+
+/* Game */
+
+.container-header {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
 }

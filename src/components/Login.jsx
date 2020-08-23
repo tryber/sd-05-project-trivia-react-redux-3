@@ -88,10 +88,9 @@ class Login extends React.Component {
             <Button
               testId="btn-settings"
               onClick={(ev) => { this.Menu(ev); }}
-              isButton={true}
               className="btn btn-settings"
             >
-              <i class="tiny material-icons">settings</i>
+              <i className="tiny material-icons">settings</i>
             </Button>
           </div>
         </form>
