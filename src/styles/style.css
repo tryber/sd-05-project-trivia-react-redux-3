@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.App {
+  font-family: 'Press Start 2P', cursive;
+}
+
 .login {
   align-items: center;
   display: flex;
@@ -16,8 +22,11 @@
 }
 
 .label .input {
+  font-family: 'Press Start 2P', cursive;
   border: none;
   border-radius: 15px;
+  font-size: 1.2rem;
   height: 32px;
+  padding-left: 18px;
   width: 300px;
 }

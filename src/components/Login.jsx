@@ -19,6 +19,7 @@ class Login extends React.Component {
       name: '',
       email: '',
     };
+    this.Labels = this.Labels.bind(this);
   }
 
   startGame(ev) {
@@ -42,31 +43,39 @@ class Login extends React.Component {
     history.push('/settings');
   }
 
+  Labels() {
+    return(
+      <div>
+        <label className="label" htmlFor="player-name">
+          Nome
+          <Input
+            id="player-name"
+            className="input"
+            type="text"
+            testId="input-player-name"
+            getValue={(val) => { this.setState({ name: val }); }}
+          />
+        </label>
+        <label className="label" htmlFor="player-email">
+          Email
+          <Input
+            id="player-email"
+            className="input"
+            type="email"
+            testId="input-gravatar-email"
+            getValue={(val) => { this.setState({ email: val }); }}
+          />
+        </label>
+      </div>
+    );
+  }
+
   render() {
     const { name, email } = this.state;
     return (
       <div className="login">
         <form className="form" onSubmit={(ev) => { this.startGame(ev); }} >
-          <label className="label" htmlFor="player-name">
-            Nome
-            <Input
-              id="player-name"
-              className="input"
-              type="text"
-              testId="input-player-name"
-              getValue={(val) => { this.setState({ name: val }); }}
-            />
-          </label>
-          <label className="label" htmlFor="player-email">
-            Email
-            <Input
-              id="player-email"
-              className="input"
-              type="email"
-              testId="input-gravatar-email"
-              getValue={(val) => { this.setState({ email: val }); }}
-            />
-          </label>
+          {this.Labels()}
           <Button testId="btn-play" isButton={false} disabled={!name.length || !email.length}>
             Jogar
           </Button>

@@ -103,6 +103,7 @@ createInput.propTypes = {
   id: propTypes.string,
   name: propTypes.string,
   testId: propTypes.string,
+  className: propTypes.string,
   getValue: propTypes.func,
 };
 
@@ -112,6 +113,7 @@ createTextArea.propTypes = {
   rows: propTypes.number,
   id: propTypes.string,
   name: propTypes.string,
+  className: propTypes.string,
   testId: propTypes.string,
 };
 
@@ -158,6 +160,7 @@ createInput.defaultProps = {
   id: '',
   name: '',
   testId: '',
+  className: '',
   getValue: () => {},
 };
 
@@ -168,6 +171,7 @@ createTextArea.defaultProps = {
   id: '',
   name: '',
   testId: '',
+  className: '',
 };
 
 createSelect.defaultProps = {
