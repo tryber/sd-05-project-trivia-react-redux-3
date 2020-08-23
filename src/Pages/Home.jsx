@@ -2,6 +2,8 @@ import React from 'react';
 import logo from '../trivia.png';
 import Login from '../components/Login';
 
+import '../styles/style.css';
+
 
 class Home extends React.Component {
   render() {

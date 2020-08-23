@@ -45,21 +45,23 @@ class Login extends React.Component {
   render() {
     const { name, email } = this.state;
     return (
-      <div>
-        <form onSubmit={(ev) => { this.startGame(ev); }} >
-          <label htmlFor="player-name">
+      <div className="login">
+        <form className="form" onSubmit={(ev) => { this.startGame(ev); }} >
+          <label className="label" htmlFor="player-name">
             Nome
             <Input
               id="player-name"
+              className="input"
               type="text"
               testId="input-player-name"
               getValue={(val) => { this.setState({ name: val }); }}
             />
           </label>
-          <label htmlFor="player-email">
+          <label className="label" htmlFor="player-email">
             Email
             <Input
               id="player-email"
+              className="input"
               type="email"
               testId="input-gravatar-email"
               getValue={(val) => { this.setState({ email: val }); }}
