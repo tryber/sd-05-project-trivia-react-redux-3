@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchQuestions } from '../actions';
+import { fetchQuestions, updateScore } from '../actions';
 import { Button } from './Inputs';
-import { addScore } from '../services/localStorage';
+import { addScore, resetScore } from '../services/localStorage';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
@@ -29,6 +29,7 @@ class Questions extends React.Component {
   componentDidMount() {
     const { token, getQuestions } = this.props;
     getQuestions(token);
+    resetScore();
     this.timer = setInterval(() => {
       const { time } = this.state;
       this.setState({ time: Math.max(time - 1, 0) });
@@ -38,19 +39,27 @@ class Questions extends React.Component {
     }, 1000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   computeScore({ difficulty }) {
     const { time } = this.state;
+    const { setScore } = this.props;
+    let score = 0;
     switch (difficulty) {
       case 'easy':
-        addScore(10 + (time));
+        score = (10 + (time));
         break;
       case 'medium':
-        addScore(10 + (time * 2));
+        score = (10 + (time * 2));
         break;
       default:
-        addScore(10 + (time * 3));
+        score = (10 + (time * 3));
         break;
     }
+    addScore(score);
+    setScore(score);
     changeColors();
     this.setState(ENABLED);
   }
@@ -77,7 +86,7 @@ class Questions extends React.Component {
             <Button
               testId={`wrong-answer-${index}`}
               key={answer.incorrect}
-              className="wrong-answer"
+              className="btn wrong-answer"
               disabled={disableButton}
               onClick={() => changeColors() || this.setState(ENABLED)}
             >
@@ -87,7 +96,7 @@ class Questions extends React.Component {
             <Button
               testId="correct-answer"
               key={answer.correct}
-              className="correct-answer"
+              className="btn correct-answer"
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
@@ -138,10 +147,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
+  setScore: (score) => dispatch(updateScore(score)),
 });
 
 Questions.propTypes = {
-  getQuestions: PropTypes.instanceOf(Object).isRequired,
+  getQuestions: PropTypes.func.isRequired,
+  setScore: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,

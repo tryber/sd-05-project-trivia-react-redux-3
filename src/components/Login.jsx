@@ -19,6 +19,7 @@ class Login extends React.Component {
       name: '',
       email: '',
     };
+    this.Labels = this.Labels.bind(this);
   }
 
   startGame(ev) {
@@ -42,34 +43,57 @@ class Login extends React.Component {
     history.push('/settings');
   }
 
+  Labels() {
+    return (
+      <div>
+        <label className="label" htmlFor="player-name">
+          Nome
+          <Input
+            id="player-name"
+            className="input"
+            type="text"
+            testId="input-player-name"
+            getValue={(val) => { this.setState({ name: val }); }}
+          />
+        </label>
+        <label className="label" htmlFor="player-email">
+          Email
+          <Input
+            id="player-email"
+            className="input"
+            type="email"
+            testId="input-gravatar-email"
+            getValue={(val) => { this.setState({ email: val }); }}
+          />
+        </label>
+      </div>
+    );
+  }
+
   render() {
     const { name, email } = this.state;
     return (
-      <div>
-        <form onSubmit={(ev) => { this.startGame(ev); }} >
-          <label htmlFor="player-name">
-            Nome
-            <Input
-              id="player-name"
-              type="text"
-              testId="input-player-name"
-              getValue={(val) => { this.setState({ name: val }); }}
-            />
-          </label>
-          <label htmlFor="player-email">
-            Email
-            <Input
-              id="player-email"
-              type="email"
-              testId="input-gravatar-email"
-              getValue={(val) => { this.setState({ email: val }); }}
-            />
-          </label>
-          <Button testId="btn-play" isButton={false} disabled={!name.length || !email.length}>
-            Jogar
-          </Button>
+      <div className="login">
+        <form className="form" onSubmit={(ev) => { this.startGame(ev); }} >
+          {this.Labels()}
+          <div className="navigation">
+            <Button
+              testId="btn-play"
+              isButton={false}
+              disabled={!name.length || !email.length}
+              className="btn btn-play"
+            >
+              Jogar
+            </Button>
+            <Button
+              testId="btn-settings"
+              onClick={(ev) => { this.Menu(ev); }}
+              className="btn btn-settings"
+            >
+              <i className="tiny material-icons">settings</i>
+            </Button>
+          </div>
         </form>
-        <Button testId="btn-settings" onClick={(ev) => { this.Menu(ev); }}>Configurações</Button>
       </div>
     );
   }

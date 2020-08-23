@@ -451,7 +451,7 @@ describe('Apresentação do _ranking_', () => {
 
 // feedback
 
-describe('O _header_ de _feedback_ deve conter as informações da pessoa jogadora', () => {
+describe.only('O _header_ de _feedback_ deve conter as informações da pessoa jogadora', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -481,6 +481,7 @@ describe('O _header_ de _feedback_ deve conter as informações da pessoa jogado
   it('o placar com o valor atual está presente no header', () => {
     cy.get(HEADER_SCORE_SELECTOR).should(($el) => {
       const state = JSON.parse(localStorage.getItem(LOCAL_STORAGE_STATE_KEY));
+      console.log(state);
       expect(parseInt($el.text())).to.be.eq(state.player.score);
     });
   });
