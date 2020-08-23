@@ -76,11 +76,25 @@ class Login extends React.Component {
       <div className="login">
         <form className="form" onSubmit={(ev) => { this.startGame(ev); }} >
           {this.Labels()}
-          <Button testId="btn-play" isButton={false} disabled={!name.length || !email.length}>
-            Jogar
-          </Button>
+          <div className="navigation">
+            <Button
+              testId="btn-play"
+              isButton={false}
+              disabled={!name.length || !email.length}
+              className="btn btn-play"
+            >
+              Jogar
+            </Button>
+            <Button
+              testId="btn-settings"
+              onClick={(ev) => { this.Menu(ev); }}
+              isButton={true}
+              className="btn btn-settings"
+            >
+              <i class="tiny material-icons">settings</i>
+            </Button>
+          </div>
         </form>
-        <Button testId="btn-settings" onClick={(ev) => { this.Menu(ev); }}>Configurações</Button>
       </div>
     );
   }

@@ -8,6 +8,10 @@
   flex-direction: column;
 }
 
+.login .form {
+  align-items: center;
+}
+
 .form .label , .login .form {
   display: flex;
   flex-direction: column;
@@ -19,12 +23,36 @@
   padding: 8px 0;
 }
 
-.input {
-  font-family: 'Press Start 2P', cursive;
+.label .input {
   border: none;
   border-radius: 15px;
+  font-family: 'Press Start 2P', cursive;
   font-size: 1.2rem;
   height: 32px;
   padding-left: 18px;
   width: 300px;
+}
+
+.navigation {
+  display: flex;
+  margin-top: 32px
+}
+
+.btn {
+  background-color: yellowgreen;
+  border: none;
+  font-family: 'Press Start 2P', cursive;
+  height: 48px;
+  padding: 0 22px;
+}
+
+.btn-play {
+  border-left: 1px dotted black;
+  width: 196px;
+  border-radius: 15px 0 0 15px;
+}
+
+.btn-settings {
+  border-left: 1px dotted black;
+  border-radius: 0 15px 15px 0;
 }

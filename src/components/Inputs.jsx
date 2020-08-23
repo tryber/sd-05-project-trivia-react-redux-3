@@ -68,14 +68,15 @@ function Select(props) {
 function Button(props) {
   const { disabled, isButton, className, testId, onClick, children } = props;
   return (
-    <input
+    <button
       data-testid={testId}
       className={className}
       type={isButton ? 'button' : 'submit'}
       disabled={disabled}
       onClick={onClick}
-      value={children}
-    />
+    >
+      {children}
+    </button>
   );
 }
 
@@ -128,7 +129,7 @@ createSelect.propTypes = {
 Button.propTypes = {
   disabled: propTypes.bool,
   isButton: propTypes.bool,
-  children: propTypes.string,
+  children: propTypes.oneOfType([ propTypes.string, propTypes.element ]),
   onClick: propTypes.func,
   testId: propTypes.string,
   className: propTypes.string,
