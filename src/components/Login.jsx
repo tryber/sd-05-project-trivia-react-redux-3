@@ -44,7 +44,7 @@ class Login extends React.Component {
   }
 
   Labels() {
-    return(
+    return (
       <div>
         <label className="label" htmlFor="player-name">
           Nome

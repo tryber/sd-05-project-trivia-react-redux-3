@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 .App {
   font-family: 'Press Start 2P', cursive;
 }
@@ -10,7 +8,7 @@
   flex-direction: column;
 }
 
-.login .form, .form .label {
+.form .label , .login .form {
   display: flex;
   flex-direction: column;
 }
