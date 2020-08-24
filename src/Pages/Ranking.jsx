@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../components/Inputs';
 import { loadRankingLocalStorage } from '../services/localStorage';
 
 class Ranking extends React.Component {
@@ -35,14 +34,13 @@ class Ranking extends React.Component {
             <p data-testid={`player-score-${index}`}>{score}</p>
           </div>
         ))}
-        <Button
-          testId="btn-go-home"
-          onClick={() => {
-            this.backToHome();
-          }}
+        <button
+          type="button"
+          data-testid="btn-go-home"
+          onClick={() => { this.backToHome(); }}
         >
           Home
-        </Button>
+        </button>
       </div>
     );
   }

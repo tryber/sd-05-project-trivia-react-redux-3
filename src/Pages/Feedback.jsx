@@ -2,17 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
-import { Button } from '../components/Inputs';
-
 class Feedback extends React.Component {
-  backToHome() {
-    const { history } = this.props;
-    history.push('/');
+  constructor() {
+    super();
+    this.goto = this.goto.bind(this);
   }
-
-  goToRanking() {
+  
+  goto(to = '/') {
     const { history } = this.props;
-    history.push('/ranking');
+    history.push(to);
   }
 
   render() {
@@ -21,19 +19,20 @@ class Feedback extends React.Component {
         <header>
           <Header />
         </header>
-        <Button
-          testId="btn-play-again"
-          onClick={(ev) => { this.backToHome(ev); }}
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={() => { this.goto(); }}
         >
           Jogar novamente
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
-          testId="btn-ranking"
-          onClick={(ev) => { this.goToRanking(ev); }}
+          data-testid="btn-ranking"
+          onClick={() => { this.goto('/ranking'); }}
         >
           Ver Ranking
-        </Button>
+        </button>
       </div>
     );
   }
