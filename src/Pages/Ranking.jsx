@@ -5,23 +5,18 @@ import { loadRankingLocalStorage } from '../services/localStorage';
 
 class Ranking extends React.Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      rankList: [],
-    }
+      rankList: loadRankingLocalStorage().sort((a, b) => (
+        parseInt(b.score, 10) - parseInt(a.score, 10)
+      )),
+    };
   }
 
   backToHome() {
     const { history } = this.props;
     history.push('/');
-  }
-
-  componentDidMount() {
-    const rankList = loadRankingLocalStorage().sort((a, b) => (
-      parseInt(b.score, 10) - parseInt(a.score, 10)
-    ));
-    this.setState({ rankList });
   }
 
   render() {

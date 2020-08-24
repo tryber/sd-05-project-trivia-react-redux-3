@@ -25,6 +25,7 @@ class Questions extends React.Component {
       questionNumber: 0,
       time: 30,
     };
+    this.renderHeader = this.renderHeader.bind(this);
     this.renderAnswers = this.renderAnswers.bind(this);
     this.computeScore = this.computeScore.bind(this);
     this.renderTimer = this.renderTimer.bind(this);
@@ -113,6 +114,17 @@ class Questions extends React.Component {
     );
   }
 
+  renderHeader() {
+    const { questions } = this.props;
+    const { questionNumber } = this.state;
+    return (
+      <div>
+        <p data-testid="question-category">{questions[questionNumber].category}</p>
+        <p data-testid="question-text">{questions[questionNumber].question.replace('&quot;', '')}</p>
+      </div>
+    )
+  }
+
   render() {
     const { questions, history } = this.props;
     const { questionNumber, showNext } = this.state;
@@ -120,10 +132,7 @@ class Questions extends React.Component {
       return (
         <div className="questions">
           {this.renderTimer()}
-          <div>
-            <p data-testid="question-category">{questions[questionNumber].category}</p>
-            <p data-testid="question-text">{questions[questionNumber].question.replace('&quot;', '')}</p>
-          </div>
+          {this.renderHeader()}
           <div className="answers">
             {this.renderAnswers()}
           </div>
