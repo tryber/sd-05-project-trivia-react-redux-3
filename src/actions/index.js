@@ -7,6 +7,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const USER_PICTURE = 'USER_PICTURE';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const UPDATE_SCORE = 'UPDATE_SCORE';
+export const NEW_SCORE = 'NEW_SCORE';
 
 const requestToken = () => ({
   type: REQUEST_TOKEN,
@@ -30,6 +31,10 @@ const loginUser = ({ name, email }) => ({
 const updateScore = (score) => ({
   type: UPDATE_SCORE,
   score,
+});
+
+const newScore = () => ({
+  type: NEW_SCORE,
 });
 
 function fetchToken() {
@@ -78,4 +83,5 @@ export {
   fetchImage,
   fetchQuestions,
   updateScore,
+  newScore,
 };
