@@ -8,6 +8,7 @@ class Feedback extends React.Component {
     super();
     this.state = {
       assertions: loadPlayerLocalStorage().assertions,
+      score: loadPlayerLocalStorage().score,
     };
   }
 
@@ -17,17 +18,19 @@ class Feedback extends React.Component {
   }
 
   render() {
-    const { assertions } = this.state;
+    const { assertions, score } = this.state;
     return (
       <div className="container-header">
         <header>
           <Header />
         </header>
+        <span>Placar: </span><span data-testid="total-score">{score}</span>
+        <span>Acertos: </span><span data-testid="feedback-total-question">{assertions}</span>
         {assertions >= 3 ? (
           <h3 data-testid="feedback-text">Mandou bem!</h3>
         ) : (
-          <h3 data-testid="feedback-text">Podia ser melhor...</h3>
-        )}
+            <h3 data-testid="feedback-text">Podia ser melhor...</h3>
+          )}
         <button
           data-testid="btn-play-again"
           onClick={() => {
