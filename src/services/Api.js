@@ -1,5 +1,5 @@
 import md5 from 'crypto-js/md5';
-import Loader from '../utils/loader';
+// import Loader from '../utils/loader';
 
 const TRIVIA = {
   URL: 'https://opentdb.com',
@@ -18,33 +18,33 @@ const GRAVATAR = {
   },
 };
 
-const getTriviaToken = () => {
-  Loader.init();
-  Loader.start();
-  return fetch(TRIVIA.requestToken())
+const getTriviaToken = () => (
+  // Loader.init();
+  // Loader.start();
+  fetch(TRIVIA.requestToken())
     .then((response) => (
       response.json()
-        .then(({ token }) => {
-          Loader.stop();
-          return token;
-        })
+        .then(({ token }) => (
+          // Loader.stop();
+          token
+        ))
         .catch((error) => {
           console.error(error, 'Erro na requisição');
-          Loader.stop();
+          // Loader.stop();
           return '';
         })
-    ));
-};
+    ))
+);
 
-const getTriviaQuestions = (token) => {
-  Loader.init();
-  Loader.start();
-  return fetch(TRIVIA.questions(token))
+const getTriviaQuestions = (token) => (
+  // Loader.init();
+  // Loader.start();
+  fetch(TRIVIA.questions(token))
     .then((res) => (
       res.json()
-        .then(({ results }) => {
-          Loader.stop();
-          return results.map((result) => (
+        .then(({ results }) => (
+          // Loader.stop();
+          results.map((result) => (
             {
               ...result,
               answers: [
@@ -54,15 +54,15 @@ const getTriviaQuestions = (token) => {
                 { correct: result.correct_answer },
               ].sort(() => (0.5 - Math.random())),
             }
-          ));
-        })
+          ))
+        ))
     ))
     .catch((error) => {
-      Loader.stop();
+      // Loader.stop();
       console.error(error, 'Token inválido!');
       return [];
-    });
-};
+    })
+);
 
 const getProfilePicture = (email) => (
   new Promise((resolve) => {

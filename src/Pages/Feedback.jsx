@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { loadPlayerLocalStorage } from '../services/localStorage';
 
 class Feedback extends React.Component {
   constructor() {
     super();
-    this.goto = this.goto.bind(this);
+    this.state = {
+      assertions: loadPlayerLocalStorage().assertions,
+    };
   }
 
   goto(to = '/') {
@@ -19,17 +22,25 @@ class Feedback extends React.Component {
         <header>
           <Header />
         </header>
+        {this.state >= 3 ? (
+          <h3 data-testid="feedback-text">Mandou bem!</h3>
+        ) : (
+          <h3 data-testid="feedback-text">Podia ser melhor...</h3>
+        )}
         <button
-          type="button"
           data-testid="btn-play-again"
-          onClick={() => { this.goto(); }}
+          onClick={() => {
+            this.goto('/');
+          }}
         >
           Jogar novamente
         </button>
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={() => { this.goto('/ranking'); }}
+          onClick={() => {
+            this.goto('/ranking');
+          }}
         >
           Ver Ranking
         </button>
