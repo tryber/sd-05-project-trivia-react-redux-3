@@ -5,14 +5,12 @@ import Header from '../components/Header';
 import { Button } from '../components/Inputs';
 
 class Feedback extends React.Component {
-  backToHome(ev) {
-    ev.preventDefault();
+  backToHome() {
     const { history } = this.props;
     history.push('/');
   }
 
-  goToRanking(ev) {
-    ev.preventDefault();
+  goToRanking() {
     const { history } = this.props;
     history.push('/ranking');
   }

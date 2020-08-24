@@ -7,7 +7,7 @@ const saveTokenLocalStorage = (token) => {
 const loadTokenLocalStorage = () => localStorage.getItem('token');
 
 // Recebe um objeto com nome do player, score e url da picture e salva no localStorage
-const saveRankingLocalStorage = (objeto) => {
+const saveRankingLocalStorage = (objeto) => {;
   let rank = JSON.parse(localStorage.getItem('ranking'));
   if (rank !== null) {
     rank.push(objeto);
@@ -52,7 +52,7 @@ const addScore = (score) => {
 };
 
 // Busca as informações do player no localStorage
-const loadPlayerLocalStorage = () => JSON.parse(localStorage.getItem('state'));
+const loadPlayerLocalStorage = () => JSON.parse(localStorage.getItem('state')).player;
 
 export {
   saveTokenLocalStorage,

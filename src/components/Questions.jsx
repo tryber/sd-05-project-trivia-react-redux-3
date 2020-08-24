@@ -4,7 +4,12 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions, updateScore } from '../actions';
 import { Button } from './Inputs';
-import { addScore, resetScore } from '../services/localStorage';
+import {
+  addScore,
+  resetScore,
+  loadPlayerLocalStorage,
+  saveRankingLocalStorage,
+} from '../services/localStorage';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
@@ -33,14 +38,15 @@ class Questions extends React.Component {
     this.timer = setInterval(() => {
       const { time } = this.state;
       this.setState({ time: Math.max(time - 1, 0) });
-      if (time === 0) {
-        this.setState(ENABLED);
-      }
+      if (time === 0) this.setState(ENABLED);
     }, 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    const { name, score } = loadPlayerLocalStorage();
+    const { profilePic: picture } = this.props;
+    saveRankingLocalStorage({ name, score, picture });
   }
 
   computeScore({ difficulty }) {
@@ -144,6 +150,7 @@ class Questions extends React.Component {
 
 const mapStateToProps = (state) => ({
   questions: state.questionsReducer.questions,
+  profilePic: state.loginReducer.src,
   token: state.getToken.token,
 });
 
@@ -156,6 +163,7 @@ Questions.propTypes = {
   getQuestions: PropTypes.func.isRequired,
   setScore: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
+  profilePic: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
 };
