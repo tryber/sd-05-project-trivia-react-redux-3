@@ -22,6 +22,7 @@ class Feedback extends React.Component {
       <div className="container-header">
         <header>
           <Header />
+          <p data-testid='feedback-total-question'>{assertions}</p>
         </header>
         {assertions >= 3 ? (
           <h3 data-testid="feedback-text">Mandou bem!</h3>

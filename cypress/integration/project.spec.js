@@ -350,7 +350,7 @@ describe('Deve existir um botão para ir ao início', () => {
   });
 });
 
-describe.only('Apresentação do _ranking_', () => {
+describe('Apresentação do _ranking_', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -400,7 +400,7 @@ describe.only('Apresentação do _ranking_', () => {
     });
   });
 
-  it.only('o _ranking_ deve ser ordenado pela pontuação', () => {
+  it('o _ranking_ deve ser ordenado pela pontuação', () => {
     cy.get(BUTTON_GO_HOME_SELECTOR).click();
     cy.get(INPUT_PLAYER_NAME_SELECTOR).clear();
     cy.get(INPUT_PLAYER_EMAIL_SELECTOR).clear();
@@ -539,7 +539,7 @@ describe('A pessoa deve ver a mensagem de _feedback_', () => {
   });
 });
 
-describe('A pessoa jogadora deve ver as informações relacionadas aos resultados obtidos', () => {
+describe.only('A pessoa jogadora deve ver as informações relacionadas aos resultados obtidos', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
