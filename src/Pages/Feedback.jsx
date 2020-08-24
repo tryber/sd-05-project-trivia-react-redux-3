@@ -22,7 +22,7 @@ class Feedback extends React.Component {
       <div className="container-header">
         <header>
           <Header />
-          <p data-testid='feedback-total-question'>{assertions}</p>
+          <p data-testid="feedback-total-question">{assertions}</p>
         </header>
         {assertions >= 3 ? (
           <h3 data-testid="feedback-text">Mandou bem!</h3>
@@ -31,18 +31,14 @@ class Feedback extends React.Component {
         )}
         <button
           data-testid="btn-play-again"
-          onClick={() => {
-            this.goto('/');
-          }}
+          onClick={() => { this.goto('/'); }}
         >
           Jogar novamente
         </button>
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={() => {
-            this.goto('/ranking');
-          }}
+          onClick={() => { this.goto('/ranking'); }}
         >
           Ver Ranking
         </button>
