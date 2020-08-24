@@ -122,7 +122,7 @@ class Questions extends React.Component {
         <p data-testid="question-category">{questions[questionNumber].category}</p>
         <p data-testid="question-text">{questions[questionNumber].question.replace('&quot;', '')}</p>
       </div>
-    )
+    );
   }
 
   render() {
