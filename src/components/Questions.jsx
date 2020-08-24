@@ -43,16 +43,16 @@ class Questions extends React.Component {
     const { getScore } = this.props;
     switch (difficulty) {
       case 'easy':
-        addScore(10 + (time));
-        getScore(10 + (time));
+        addScore(10 * (time));
+        getScore(10 * (time));
         break;
       case 'medium':
-        addScore(10 + (time * 2));
-        getScore(10 + (time * 2));
+        addScore(10 * (time * 2));
+        getScore(10 * (time * 2));
         break;
       default:
-        addScore(10 + (time * 3));
-        getScore(10 + (time * 3));
+        addScore(10 * (time * 3));
+        getScore(10 * (time * 3));
         break;
     }
     changeColors();
