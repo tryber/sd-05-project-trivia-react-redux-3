@@ -21,9 +21,7 @@ class Feedback extends React.Component {
     const { assertions, score } = this.state;
     return (
       <div className="container-header">
-        <header>
-          <Header />
-        </header>
+        <Header />
         <span>Placar: </span><span data-testid="total-score">{score}</span>
         <span>Acertos: </span><span data-testid="feedback-total-question">{assertions}</span>
         {assertions >= 3 ? (
