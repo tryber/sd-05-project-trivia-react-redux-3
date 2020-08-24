@@ -21,7 +21,7 @@ const questionsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         score: 0,
-      }
+      };
     default:
       return state;
   }
