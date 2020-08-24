@@ -7,13 +7,8 @@ class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      assertions: 0,
+      assertions: loadPlayerLocalStorage().assertions,
     };
-  }
-
-  componentDidMount() {
-    const state = loadPlayerLocalStorage.assertions
-    this.setState({ assertions: {state} });
   }
 
   goto(to = '/') {
@@ -56,7 +51,6 @@ class Feedback extends React.Component {
 
 Feedback.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
-  assertions: PropTypes.number.isRequired,
 };
 
 export default Feedback;

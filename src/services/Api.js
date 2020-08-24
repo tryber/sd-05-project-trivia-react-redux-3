@@ -1,5 +1,5 @@
 import md5 from 'crypto-js/md5';
-import Loader from '../utils/loader';
+// import Loader from '../utils/loader';
 
 const TRIVIA = {
   URL: 'https://opentdb.com',
@@ -19,31 +19,31 @@ const GRAVATAR = {
 };
 
 const getTriviaToken = () => {
-  Loader.init();
-  Loader.start();
+  // Loader.init();
+  // Loader.start();
   return fetch(TRIVIA.requestToken())
     .then((response) => (
       response.json()
         .then(({ token }) => {
-          Loader.stop();
+          // Loader.stop();
           return token;
         })
         .catch((error) => {
           console.error(error, 'Erro na requisição');
-          Loader.stop();
+          // Loader.stop();
           return '';
         })
     ));
 };
 
 const getTriviaQuestions = (token) => {
-  Loader.init();
-  Loader.start();
+  // Loader.init();
+  // Loader.start();
   return fetch(TRIVIA.questions(token))
     .then((res) => (
       res.json()
         .then(({ results }) => {
-          Loader.stop();
+          // Loader.stop();
           return results.map((result) => (
             {
               ...result,
@@ -58,7 +58,7 @@ const getTriviaQuestions = (token) => {
         })
     ))
     .catch((error) => {
-      Loader.stop();
+      // Loader.stop();
       console.error(error, 'Token inválido!');
       return [];
     });

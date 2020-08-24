@@ -28,6 +28,7 @@ class Questions extends React.Component {
     this.renderAnswers = this.renderAnswers.bind(this);
     this.computeScore = this.computeScore.bind(this);
     this.renderTimer = this.renderTimer.bind(this);
+    this.startTimer = this.startTimer.bind(this);
     this.timer = {};
   }
 
@@ -35,11 +36,7 @@ class Questions extends React.Component {
     const { token, getQuestions } = this.props;
     getQuestions(token);
     resetScore();
-    this.timer = setInterval(() => {
-      const { time } = this.state;
-      this.setState({ time: Math.max(time - 1, 0) });
-      if (time === 0) this.setState(ENABLED);
-    }, 1000);
+    this.startTimer();
   }
 
   componentWillUnmount() {
@@ -47,6 +44,14 @@ class Questions extends React.Component {
     const { name, score } = loadPlayerLocalStorage();
     const { profilePic: picture } = this.props;
     saveRankingLocalStorage({ name, score, picture });
+  }
+
+  startTimer() {
+    this.timer = setInterval(() => {
+      const { time } = this.state;
+      this.setState({ time: Math.max(time - 1, 0) });
+      if (time === 0) this.setState(ENABLED);
+    }, 1000);
   }
 
   computeScore({ difficulty }) {
@@ -90,7 +95,10 @@ class Questions extends React.Component {
         Object.keys(answer)[0] === 'incorrect' ?
           (
             <button
-              data-testid={`wrong-answer-${index}`}
+              data-testid={
+                questions[questionNumber].type !== 'boolean' ?
+                `wrong-answer-${index}` : 'wrong-answer'
+              }
               key={answer.incorrect}
               className="btn btn-answer wrong-answer"
               disabled={disableButton}
@@ -139,11 +147,13 @@ class Questions extends React.Component {
             data-testid="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
+                clearInterval(this.timer);
                 this.setState({
                   ...DISABLED,
                   questionNumber: questionNumber + 1,
                   time: 30,
                 });
+                this.startTimer();
               } else history.push('/feedback');
             }}
           >
