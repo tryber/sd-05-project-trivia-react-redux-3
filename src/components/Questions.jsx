@@ -47,6 +47,7 @@ class Questions extends React.Component {
   }
 
   startTimer() {
+    clearInterval(this.timer);
     this.timer = setInterval(() => {
       const { time } = this.state;
       this.setState({ time: Math.max(time - 1, 0) });
