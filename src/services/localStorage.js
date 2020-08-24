@@ -52,7 +52,7 @@ const addScore = (score) => {
 };
 
 // Busca as informações do player no localStorage
-const loadPlayerLocalStorage = () => JSON.parse(localStorage.getItem('state'));
+const loadPlayerLocalStorage = () => JSON.parse(localStorage.getItem('state')).player;
 
 export {
   saveTokenLocalStorage,

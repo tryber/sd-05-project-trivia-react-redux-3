@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions, updateScore } from '../actions';
-import { Button } from './Inputs';
-import { addScore, resetScore } from '../services/localStorage';
+import {
+  addScore,
+  resetScore,
+  loadPlayerLocalStorage,
+  saveRankingLocalStorage,
+} from '../services/localStorage';
 
 import './Questions.css';
 import changeColors from '../services/changeColors';
@@ -20,6 +24,7 @@ class Questions extends React.Component {
       questionNumber: 0,
       time: 30,
     };
+    this.renderHeader = this.renderHeader.bind(this);
     this.renderAnswers = this.renderAnswers.bind(this);
     this.computeScore = this.computeScore.bind(this);
     this.renderTimer = this.renderTimer.bind(this);
@@ -33,14 +38,15 @@ class Questions extends React.Component {
     this.timer = setInterval(() => {
       const { time } = this.state;
       this.setState({ time: Math.max(time - 1, 0) });
-      if (time === 0) {
-        this.setState(ENABLED);
-      }
+      if (time === 0) this.setState(ENABLED);
     }, 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    const { name, score } = loadPlayerLocalStorage();
+    const { profilePic: picture } = this.props;
+    saveRankingLocalStorage({ name, score, picture });
   }
 
   computeScore({ difficulty }) {
@@ -83,27 +89,38 @@ class Questions extends React.Component {
       questions[questionNumber].answers.map((answer, index) => (
         Object.keys(answer)[0] === 'incorrect' ?
           (
-            <Button
-              testId={`wrong-answer-${index}`}
+            <button
+              data-testid={`wrong-answer-${index}`}
               key={answer.incorrect}
-              className="btn wrong-answer"
+              className="btn btn-answer wrong-answer"
               disabled={disableButton}
               onClick={() => changeColors() || this.setState(ENABLED)}
             >
-              {answer.incorrect}
-            </Button>
+              {answer.incorrect.replace('&quot;', '')}
+            </button>
           ) : (
-            <Button
-              testId="correct-answer"
+            <button
+              data-testid="correct-answer"
               key={answer.correct}
-              className="btn correct-answer"
+              className="btn btn-answer correct-answer"
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
-              {answer.correct}
-            </Button>
+              {answer.correct.replace('&quot;', '')}
+            </button>
           )
       ))
+    );
+  }
+
+  renderHeader() {
+    const { questions } = this.props;
+    const { questionNumber } = this.state;
+    return (
+      <div>
+        <p data-testid="question-category">{questions[questionNumber].category}</p>
+        <p data-testid="question-text">{questions[questionNumber].question.replace('&quot;', '')}</p>
+      </div>
     );
   }
 
@@ -112,15 +129,14 @@ class Questions extends React.Component {
     const { questionNumber, showNext } = this.state;
     if (questions.length) {
       return (
-        <div>
+        <div className="questions">
           {this.renderTimer()}
-          <div>
-            <p data-testid="question-category">{questions[questionNumber].category}</p>
-            <p data-testid="question-text">{questions[questionNumber].question}</p>
+          {this.renderHeader()}
+          <div className="answers">
+            {this.renderAnswers()}
           </div>
-          {this.renderAnswers()}
-          {(showNext) ? <Button
-            testId="btn-next"
+          {(showNext) ? <button
+            data-testid="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
                 this.setState({
@@ -132,7 +148,7 @@ class Questions extends React.Component {
             }}
           >
             Próxima
-          </Button> : ''}
+          </button> : ''}
         </div>
       );
     }
@@ -142,6 +158,7 @@ class Questions extends React.Component {
 
 const mapStateToProps = (state) => ({
   questions: state.questionsReducer.questions,
+  profilePic: state.loginReducer.src,
   token: state.getToken.token,
 });
 
@@ -154,6 +171,7 @@ Questions.propTypes = {
   getQuestions: PropTypes.func.isRequired,
   setScore: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
+  profilePic: PropTypes.string.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
 };

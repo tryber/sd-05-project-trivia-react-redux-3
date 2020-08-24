@@ -62,3 +62,21 @@
   font-family: 'Press Start 2P', cursive;
   font-size: 1.2rem;
 }
+
+.btn-answer {
+  margin: 4px;
+  width: 25%;
+}
+
+.questions {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.questions .answers {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
