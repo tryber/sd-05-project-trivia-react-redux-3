@@ -18,10 +18,10 @@ const GRAVATAR = {
   },
 };
 
-const getTriviaToken = () => {
+const getTriviaToken = () => (
   // Loader.init();
   // Loader.start();
-  return fetch(TRIVIA.requestToken())
+  fetch(TRIVIA.requestToken())
     .then((response) => (
       response.json()
         .then(({ token }) => {
@@ -33,18 +33,18 @@ const getTriviaToken = () => {
           // Loader.stop();
           return '';
         })
-    ));
-};
+    ))
+);
 
-const getTriviaQuestions = (token) => {
+const getTriviaQuestions = (token) => (
   // Loader.init();
   // Loader.start();
-  return fetch(TRIVIA.questions(token))
+  fetch(TRIVIA.questions(token))
     .then((res) => (
       res.json()
-        .then(({ results }) => {
+        .then(({ results }) => (
           // Loader.stop();
-          return results.map((result) => (
+          results.map((result) => (
             {
               ...result,
               answers: [
@@ -54,15 +54,15 @@ const getTriviaQuestions = (token) => {
                 { correct: result.correct_answer },
               ].sort(() => (0.5 - Math.random())),
             }
-          ));
-        })
+          ))
+        ))
     ))
     .catch((error) => {
       // Loader.stop();
       console.error(error, 'Token inválido!');
       return [];
-    });
-};
+    })
+);
 
 const getProfilePicture = (email) => (
   new Promise((resolve) => {
