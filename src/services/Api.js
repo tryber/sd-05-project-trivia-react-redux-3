@@ -24,10 +24,10 @@ const getTriviaToken = () => (
   fetch(TRIVIA.requestToken())
     .then((response) => (
       response.json()
-        .then(({ token }) => {
+        .then(({ token }) => (
           // Loader.stop();
-          return token;
-        })
+          token
+        ))
         .catch((error) => {
           console.error(error, 'Erro na requisição');
           // Loader.stop();
