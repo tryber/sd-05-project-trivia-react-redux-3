@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions, updateScore } from '../actions';
-import { Button } from './Inputs';
 import {
   addScore,
   resetScore,
@@ -90,25 +89,25 @@ class Questions extends React.Component {
       questions[questionNumber].answers.map((answer, index) => (
         Object.keys(answer)[0] === 'incorrect' ?
           (
-            <Button
-              testId={`wrong-answer-${index}`}
+            <button
+              data-testid={`wrong-answer-${index}`}
               key={answer.incorrect}
               className="btn btn-answer wrong-answer"
               disabled={disableButton}
               onClick={() => changeColors() || this.setState(ENABLED)}
             >
               {answer.incorrect.replace('&quot;', '')}
-            </Button>
+            </button>
           ) : (
-            <Button
-              testId="correct-answer"
+            <button
+              data-testid="correct-answer"
               key={answer.correct}
               className="btn btn-answer correct-answer"
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
               {answer.correct.replace('&quot;', '')}
-            </Button>
+            </button>
           )
       ))
     );
@@ -136,8 +135,8 @@ class Questions extends React.Component {
           <div className="answers">
             {this.renderAnswers()}
           </div>
-          {(showNext) ? <Button
-            testId="btn-next"
+          {(showNext) ? <button
+            data-testid="btn-next"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
                 this.setState({
@@ -149,7 +148,7 @@ class Questions extends React.Component {
             }}
           >
             Próxima
-          </Button> : ''}
+          </button> : ''}
         </div>
       );
     }
