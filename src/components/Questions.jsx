@@ -86,21 +86,21 @@ class Questions extends React.Component {
             <Button
               testId={`wrong-answer-${index}`}
               key={answer.incorrect}
-              className="btn wrong-answer"
+              className="btn btn-answer wrong-answer"
               disabled={disableButton}
               onClick={() => changeColors() || this.setState(ENABLED)}
             >
-              {answer.incorrect}
+              {answer.incorrect.replace('&quot;', '')}
             </Button>
           ) : (
             <Button
               testId="correct-answer"
               key={answer.correct}
-              className="btn correct-answer"
+              className="btn btn-answer correct-answer"
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
-              {answer.correct}
+              {answer.correct.replace('&quot;', '')}
             </Button>
           )
       ))
@@ -112,13 +112,15 @@ class Questions extends React.Component {
     const { questionNumber, showNext } = this.state;
     if (questions.length) {
       return (
-        <div>
+        <div className="questions">
           {this.renderTimer()}
           <div>
             <p data-testid="question-category">{questions[questionNumber].category}</p>
-            <p data-testid="question-text">{questions[questionNumber].question}</p>
+            <p data-testid="question-text">{questions[questionNumber].question.replace('&quot;', '')}</p>
           </div>
-          {this.renderAnswers()}
+          <div className="answers">
+            {this.renderAnswers()}
+          </div>
           {(showNext) ? <Button
             testId="btn-next"
             onClick={() => {
