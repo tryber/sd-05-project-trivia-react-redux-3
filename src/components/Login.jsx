@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchToken, loginUser } from '../actions/index';
+import { fetchToken, loginUser, newScore } from '../actions/index';
 import { Button, Input } from './Inputs';
 import {
   saveTokenLocalStorage,
@@ -24,9 +24,10 @@ class Login extends React.Component {
 
   startGame(ev) {
     ev.preventDefault();
-    const { getToken, setUser, history } = this.props;
+    const { getToken, setUser, history, restartScore } = this.props;
     const { name, email: gravatarEmail } = this.state;
     setUser(this.state);
+    restartScore();
     getToken()
       .then(({ token }) => {
         saveTokenLocalStorage(token);
@@ -102,12 +103,14 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   getToken: () => dispatch(fetchToken()),
   setUser: ({ name, email }) => dispatch(loginUser({ name, email })),
+  restartScore: () => dispatch(newScore()),
 });
 
 Login.propTypes = {
   getToken: PropTypes.instanceOf(Object).isRequired,
   setUser: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  restartScore: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default withRouter(connect(null, mapDispatchToProps)(Login));
