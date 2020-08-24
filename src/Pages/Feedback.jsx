@@ -7,7 +7,7 @@ class Feedback extends React.Component {
     super();
     this.goto = this.goto.bind(this);
   }
-  
+
   goto(to = '/') {
     const { history } = this.props;
     history.push(to);
