@@ -96,8 +96,7 @@ class Questions extends React.Component {
         Object.keys(answer)[0] === 'incorrect' ?
           (
             <button
-              data-testid={questions[questionNumber].type !== 'boolean' ?
-                `wrong-answer-${index}` : 'wrong-answer'}
+              data-testid={'wrong-answer'}
               key={answer.incorrect}
               className="btn btn-answer wrong-answer"
               disabled={disableButton}
