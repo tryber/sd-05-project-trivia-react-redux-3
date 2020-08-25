@@ -10,6 +10,7 @@ import {
   saveRankingLocalStorage,
 } from '../services/localStorage';
 
+import 'nes.css/css/nes.min.css';
 import './Questions.css';
 import changeColors from '../services/changeColors';
 
@@ -98,7 +99,7 @@ class Questions extends React.Component {
             <button
               data-testid={'wrong-answer'}
               key={answer.incorrect}
-              className="btn btn-answer wrong-answer"
+              className="nes-btn wrong-answer"
               disabled={disableButton}
               onClick={() => changeColors() || this.setState(ENABLED)}
             >
@@ -108,7 +109,7 @@ class Questions extends React.Component {
             <button
               data-testid="correct-answer"
               key={answer.correct}
-              className="btn btn-answer correct-answer"
+              className="nes-btn correct-answer"
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
@@ -135,7 +136,7 @@ class Questions extends React.Component {
     const { questionNumber, showNext } = this.state;
     if (questions.length) {
       return (
-        <div className="questions">
+        <div className="questions nes-container is-centered is-rounded">
           {this.renderTimer()}
           {this.renderHeader()}
           <div className="answers">
@@ -143,6 +144,7 @@ class Questions extends React.Component {
           </div>
           {(showNext) ? <button
             data-testid="btn-next"
+            className="nes-btn is-primary"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
                 clearInterval(this.timer);

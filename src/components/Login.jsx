@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { fetchToken, loginUser, newScore } from '../actions/index';
 import { Button, Input } from './Inputs';
+import { Container, ControllerIcon } from 'nes-react';
+import 'nes.css/css/nes.min.css';
 import {
   saveTokenLocalStorage,
   savePlayerLocalStorage,
@@ -31,7 +33,12 @@ class Login extends React.Component {
     getToken()
       .then(({ token }) => {
         saveTokenLocalStorage(token);
-        savePlayerLocalStorage({ name, assertions: 0, score: 0, gravatarEmail });
+        savePlayerLocalStorage({
+          name,
+          assertions: 0,
+          score: 0,
+          gravatarEmail,
+        });
       })
       .then(() => {
         history.push('/gameplay');
@@ -51,20 +58,24 @@ class Login extends React.Component {
           Nome
           <Input
             id="player-name"
-            className="input"
+            className="input nes-pointer"
             type="text"
             testId="input-player-name"
-            getValue={(val) => { this.setState({ name: val }); }}
+            getValue={(val) => {
+              this.setState({ name: val });
+            }}
           />
         </label>
         <label className="label" htmlFor="player-email">
           Email
           <Input
             id="player-email"
-            className="input"
+            className="input nes-pointer"
             type="email"
             testId="input-gravatar-email"
-            getValue={(val) => { this.setState({ email: val }); }}
+            getValue={(val) => {
+              this.setState({ email: val });
+            }}
           />
         </label>
       </div>
@@ -74,28 +85,36 @@ class Login extends React.Component {
   render() {
     const { name, email } = this.state;
     return (
-      <div className="login">
-        <form className="form" onSubmit={(ev) => { this.startGame(ev); }} >
+      <Container centered rounded className="login">
+        <p className='title'>Login</p>
+        <form
+          className="form"
+          onSubmit={(ev) => {
+            this.startGame(ev);
+          }}
+        >
           {this.Labels()}
           <div className="navigation">
             <Button
               testId="btn-play"
               isButton={false}
               disabled={!name.length || !email.length}
-              className="btn btn-play"
+              className="btn btn-play nes-btn is-error"
             >
               Jogar
             </Button>
             <Button
               testId="btn-settings"
-              onClick={(ev) => { this.Menu(ev); }}
-              className="btn btn-settings"
+              onClick={(ev) => {
+                this.Menu(ev);
+              }}
+              className="btn btn-settings nes-btn is-error"
             >
-              <i className="tiny material-icons">settings</i>
+              <ControllerIcon controller="snes-jp" />
             </Button>
           </div>
         </form>
-      </div>
+      </Container>
     );
   }
 }

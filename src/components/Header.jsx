@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchImage } from '../actions';
-
+import '../styles/style.css'
 class Header extends React.Component {
   componentDidMount() {
     const { getImage } = this.props;
@@ -14,7 +14,7 @@ class Header extends React.Component {
     const { name, email } = this.props.user;
     const { src, score } = this.props;
     return (
-      <header>
+      <header className="container-header">
         <img
           data-testid="header-profile-picture"
           alt="imagem do usuário"
@@ -22,7 +22,7 @@ class Header extends React.Component {
         />
         <p data-testid="header-player-name">{name}</p>
         <p>{email}</p>
-        <p data-testid="header-score">
+        <p className="score" data-testid="header-score">
           <span data-testid="feedback-total-score">
             {score}
           </span>

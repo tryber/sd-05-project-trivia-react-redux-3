@@ -2,7 +2,7 @@
   font-family: 'Press Start 2P', cursive;
 }
 
-.form .label , .login , .login .form , .navigation , .questions , .questions .answers {
+.form .label , .login , .login .form , .navigation , .questions , .questions .answers, .game {
   display: flex;
 }
 
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.form .label , .login .form , .login {
+.form .label , .login .form , .login, .game {
   flex-direction: column;
 }
 
@@ -20,40 +20,69 @@
   padding: 8px 0;
 }
 
+.login, .form {
+  width: 600px;
+  background: #010326;
+}
+
 .label .input {
-  border: none;
-  border-radius: 15px;
+  border: 5px solid black;
+  border-radius: 1px;
   font-size: 1.2rem;
-  height: 32px;
+  height: 48px;
+  margin-top: 12px;
   padding-left: 18px;
-  width: 300px;
+  width: 100%;
 }
 
 .navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
   margin-top: 32px;
+  padding: 0;
+  width: 80%;
 }
 
 .btn {
-  background-color: yellowgreen;
   border: none;
-  height: 48px;
-  padding: 0 22px;
+  height: 80px;
 }
 
 .btn-play {
-  border-left: 1px dotted #212121;
-  border-radius: 15px 0 0 15px;
-  width: 196px;
+  border: none;
+  border-right: none;
+  border-radius: 1px 0 0 1px;
+  width: 80%;
 }
 
 .btn-settings {
-  border-left: 1px dotted #212121;
-  border-radius: 0 15px 15px 0;
+  border: none;
+  border-left: 3px dotted #212121;
+  border-radius: 0 1px 1px 0;
+  width: 20%;
 }
 
 /* Game */
+
+.game {
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+}
+
 .container-header {
-  font-size: 1.2rem;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+  background-color: #0D0D0D;
+}
+
+.container-header .score {
+  font-size: 4.0rem;
+  margin-top: 15px;
 }
 
 .btn-answer {
@@ -62,6 +91,7 @@
 }
 
 .questions {
+  background: #010326;
   flex-direction: column;
   width: 90%;
 }
@@ -69,4 +99,5 @@
 .questions .answers {
   justify-content: space-between;
   width: 90%;
+  padding: 32px 0;
 }
