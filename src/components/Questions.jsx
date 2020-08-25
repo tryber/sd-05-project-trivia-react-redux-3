@@ -47,6 +47,7 @@ class Questions extends React.Component {
   }
 
   startTimer() {
+    clearInterval(this.timer);
     this.timer = setInterval(() => {
       const { time } = this.state;
       this.setState({ time: Math.max(time - 1, 0) });
@@ -91,12 +92,11 @@ class Questions extends React.Component {
     const { questions } = this.props;
     const { questionNumber, disableButton } = this.state;
     return (
-      questions[questionNumber].answers.map((answer, index) => (
+      questions[questionNumber].answers.map((answer) => (
         Object.keys(answer)[0] === 'incorrect' ?
           (
             <button
-              data-testid={questions[questionNumber].type !== 'boolean' ?
-                `wrong-answer-${index}` : 'wrong-answer'}
+              data-testid={'wrong-answer'}
               key={answer.incorrect}
               className="btn btn-answer wrong-answer"
               disabled={disableButton}

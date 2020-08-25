@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { loadRankingLocalStorage } from '../services/localStorage';
+import unique from '../utils';
 
 class Ranking extends React.Component {
 
@@ -24,7 +25,7 @@ class Ranking extends React.Component {
       <div>
         <h2 data-testid="ranking-title">Ranking</h2>
         {rankList.map(({ name, picture, score }, index) => (
-          <div key={name} className="rank-list">
+          <div key={unique(name)} className="rank-list">
             <img
               data-testid={`player-picture-${index}`}
               alt="imagem do usuário"

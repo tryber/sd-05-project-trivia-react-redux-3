@@ -22,7 +22,11 @@ class Header extends React.Component {
         />
         <p data-testid="header-player-name">{name}</p>
         <p>{email}</p>
-        <p data-testid="header-score">{score}</p>
+        <p data-testid="header-score">
+          <span data-testid="feedback-total-score">
+            {score}
+          </span>
+        </p>
       </header>
     );
   }

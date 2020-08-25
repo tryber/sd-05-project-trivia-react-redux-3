@@ -350,7 +350,7 @@ describe('Deve existir um botão para ir ao início', () => {
   });
 });
 
-describe.only('Apresentação do _ranking_', () => {
+describe('Apresentação do _ranking_', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -539,7 +539,7 @@ describe('A pessoa deve ver a mensagem de _feedback_', () => {
   });
 });
 
-describe('A pessoa jogadora deve ver as informações relacionadas aos resultados obtidos', () => {
+describe.only('A pessoa jogadora deve ver as informações relacionadas aos resultados obtidos', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();

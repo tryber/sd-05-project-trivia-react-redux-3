@@ -1,19 +1,16 @@
-.App {
+.App , .btn , .label .input , .container-header {
   font-family: 'Press Start 2P', cursive;
 }
 
-.login {
-  align-items: center;
+.form .label , .login , .login .form , .navigation , .questions , .questions .answers {
   display: flex;
-  flex-direction: column;
 }
 
-.login .form {
+.login .form , .login , .questions {
   align-items: center;
 }
 
-.form .label , .login .form {
-  display: flex;
+.form .label , .login .form , .login {
   flex-direction: column;
 }
 
@@ -26,7 +23,6 @@
 .label .input {
   border: none;
   border-radius: 15px;
-  font-family: 'Press Start 2P', cursive;
   font-size: 1.2rem;
   height: 32px;
   padding-left: 18px;
@@ -34,32 +30,29 @@
 }
 
 .navigation {
-  display: flex;
   margin-top: 32px;
 }
 
 .btn {
   background-color: yellowgreen;
   border: none;
-  font-family: 'Press Start 2P', cursive;
   height: 48px;
   padding: 0 22px;
 }
 
 .btn-play {
-  border-left: 1px dotted black;
+  border-left: 1px dotted #212121;
   border-radius: 15px 0 0 15px;
   width: 196px;
 }
 
 .btn-settings {
-  border-left: 1px dotted black;
+  border-left: 1px dotted #212121;
   border-radius: 0 15px 15px 0;
 }
 
 /* Game */
 .container-header {
-  font-family: 'Press Start 2P', cursive;
   font-size: 1.2rem;
 }
 
@@ -69,14 +62,11 @@
 }
 
 .questions {
-  align-items: center;
-  display: flex;
   flex-direction: column;
   width: 90%;
 }
 
 .questions .answers {
-  display: flex;
   justify-content: space-between;
   width: 90%;
 }
