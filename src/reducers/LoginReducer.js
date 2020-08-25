@@ -1,6 +1,8 @@
 import {
   LOGIN_USER,
   USER_PICTURE,
+  UPDATE_SCORE,
+  NEW_SCORE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -9,6 +11,7 @@ const INITIAL_STATE = {
     user: '',
   },
   src: '',
+  score: 0,
 };
 
 const loginReducer = (state = INITIAL_STATE, action) => {
@@ -22,6 +25,16 @@ const loginReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         src: action.src,
+      };
+    case UPDATE_SCORE:
+      return {
+        ...state,
+        score: state.score + action.score,
+      };
+    case NEW_SCORE:
+      return {
+        ...state,
+        score: 0,
       };
     default:
       return state;
