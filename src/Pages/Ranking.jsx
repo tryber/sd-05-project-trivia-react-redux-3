@@ -27,7 +27,6 @@ class Ranking extends React.Component {
         {rankList.map(({ name, picture, score }, index) => (
           <div key={unique(name)} className="rank-list">
             <img
-              data-testid={`player-picture-${index}`}
               alt="imagem do usuário"
               src={picture}
             />
