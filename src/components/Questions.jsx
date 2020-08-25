@@ -92,7 +92,7 @@ class Questions extends React.Component {
     const { questions } = this.props;
     const { questionNumber, disableButton } = this.state;
     return (
-      questions[questionNumber].answers.map((answer, index) => (
+      questions[questionNumber].answers.map((answer) => (
         Object.keys(answer)[0] === 'incorrect' ?
           (
             <button
