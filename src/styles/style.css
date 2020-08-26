@@ -1,16 +1,30 @@
-.App , .btn , .label .input , .container-header {
+.App,
+.btn,
+.label .input,
+.container-header {
   font-family: 'Press Start 2P', cursive;
 }
 
-.form .label , .login , .login .form , .navigation , .questions , .questions .answers {
+.form .label,
+.login,
+.login .form,
+.navigation,
+.questions,
+.questions .answers,
+.game {
   display: flex;
 }
 
-.login .form , .login , .questions {
+.login .form,
+.login,
+.questions {
   align-items: center;
 }
 
-.form .label , .login .form , .login {
+.form .label,
+.login .form,
+.login,
+.game {
   flex-direction: column;
 }
 
@@ -20,53 +34,146 @@
   padding: 8px 0;
 }
 
+.login,
+.form {
+  background: #370617;
+  width: 600px;
+}
+
 .label .input {
-  border: none;
-  border-radius: 15px;
+  border-radius: 1px;
+  border: 5px solid black;
   font-size: 1.2rem;
-  height: 32px;
+  height: 48px;
+  margin-top: 12px;
   padding-left: 18px;
-  width: 300px;
+  width: 100%;
 }
 
 .navigation {
+  display: flex;
+  justify-content: center;
   margin-top: 32px;
-}
-
-.btn {
-  background-color: yellowgreen;
-  border: none;
-  height: 48px;
-  padding: 0 22px;
+  margin: 0;
+  padding: 0;
+  width: 80%;
 }
 
 .btn-play {
-  border-left: 1px dotted #212121;
-  border-radius: 15px 0 0 15px;
-  width: 196px;
+  border-radius: 1px 0 0 1px;
+  border-right: none;
+  border: none;
+  padding: 16px 32px;
 }
 
-.btn-settings {
-  border-left: 1px dotted #212121;
-  border-radius: 0 15px 15px 0;
-}
+/*.btn-settings {
+  border-left: 3px dotted #212121;
+  border-radius: 0 1px 1px 0;
+  border: none;
+  width: 20%;
+} */
 
 /* Game */
-.container-header {
-  font-size: 1.2rem;
+
+.game {
+  height: 100vh;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.btn-answer {
-  margin: 4px;
-  width: 25%;
+.container-header {
+  align-items: center;
+  background-color: #0d0d0d;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: space-between;
+  padding: 16px 64px;
+  width: 100%;
+}
+
+.subcontainer {
+  align-items: center;
+  display: flex;
+  font-size: 1.5rem;
+  justify-items: center;
+  justify-content: space-around;
+  width: 40%;
+}
+
+.nes-avatar {
+  image-rendering: pixelated;
+}
+
+.container-header .score {
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 3rem;
+  justify-items: center;
+  width: 20%;
+}
+
+.nes-icon {
+  height: 16px !important;
+  width: 16px !important;
+  margin-left: 8px;
 }
 
 .questions {
+  background: #370617;
   flex-direction: column;
   width: 90%;
 }
 
+.options {
+  min-width: 25%;
+}
+
 .questions .answers {
   justify-content: space-between;
+  padding: 32px 0;
+  width: 90%;
+}
+
+.questions-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.interviewer {
+  align-self: flex-start;
+}
+
+/* Feedback */
+
+.feedback-score {
+  align-items: center;
+  display: flex;
+  font-size: 3rem;
+  justify-items: space-around;
+}
+
+.feedback-text {
+  font-size: 1.3rem;
+}
+
+/* Ranking */
+
+.rank-container {
+  font-size: 3rem;
+  padding: 32px 0;
+  text-align: center;
+}
+
+.rank-list {
+  width: 33%;
+}
+
+.rank-card {
+  align-items: center;
+  display: flex;
+  font-size: 1.7rem;
+  justify-content: space-between;
+  margin-bottom: 8px;
   width: 90%;
 }

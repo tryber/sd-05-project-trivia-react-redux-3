@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchImage } from '../actions';
-
+import '../styles/style.css'
 class Header extends React.Component {
   componentDidMount() {
     const { getImage } = this.props;
@@ -14,19 +14,22 @@ class Header extends React.Component {
     const { name, email } = this.props.user;
     const { src, score } = this.props;
     return (
-      <header>
-        <img
-          data-testid="header-profile-picture"
-          alt="imagem do usuário"
-          src={src}
-        />
-        <p data-testid="header-player-name">{name}</p>
-        <p>{email}</p>
-        <p data-testid="header-score">
-          <span data-testid="feedback-total-score">
+      <header className="container-header">
+        <div className="subcontainer nes-container is-rounded">  
+          <img
+            data-testid="header-profile-picture"
+            alt="imagem do usuário"
+            src={src}
+          />
+          <div className="space name" data-testid="header-player-name">{name}</div>
+          <div className="space" >{email}</div>
+        </div>
+        <div className="score nes-container is-rounded" data-testid="header-score">
+          <div className="nes-icon coin is-medium"></div>
+          <div data-testid="feedback-total-score">
             {score}
-          </span>
-        </p>
+          </div>
+        </div>
       </header>
     );
   }

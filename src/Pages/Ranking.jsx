@@ -4,13 +4,12 @@ import { loadRankingLocalStorage } from '../services/localStorage';
 import unique from '../utils';
 
 class Ranking extends React.Component {
-
   constructor() {
     super();
     this.state = {
-      rankList: loadRankingLocalStorage().sort((a, b) => (
-        parseInt(b.score, 10) - parseInt(a.score, 10)
-      )),
+      rankList: loadRankingLocalStorage().sort(
+        (a, b) => parseInt(b.score, 10) - parseInt(a.score, 10)
+      ),
     };
   }
 
@@ -22,27 +21,32 @@ class Ranking extends React.Component {
   render() {
     const { rankList } = this.state;
     return (
-      <div>
-        <h2 data-testid="ranking-title">Ranking</h2>
-        {rankList.map(({ name, picture, score }, index) => (
-          <div key={unique(name)} className="rank-list">
-            <img
-              data-testid={`player-picture-${index}`}
-              alt="imagem do usuário"
-              src={picture}
-            />
-            <p data-testid={`player-name-${index}`}>{name}</p>
-            <p data-testid={`player-score-${index}`}>{score}</p>
+        <div className="rank-container">
+          <h2 data-testid="ranking-title">Ranking</h2>
+          <div className="rank-list">
+            {rankList.map(({ name, picture, score }, index) => (
+              <div className="rank-card" key={unique(name)}>
+                <img
+                  data-testid={`player-picture-${index}`}
+                  alt="imagem do usuário"
+                  src={picture}
+                />
+                <span data-testid={`player-name-${index}`}>{name}</span>
+                <span data-testid={`player-score-${index}`}>{score}</span>
+              </div>
+            ))}
           </div>
-        ))}
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={() => { this.backToHome(); }}
-        >
-          Home
-        </button>
-      </div>
+          <button
+            type="button"
+            className="nes-btn"
+            data-testid="btn-go-home"
+            onClick={() => {
+              this.backToHome();
+            }}
+          >
+            Home
+          </button>
+        </div>
     );
   }
 }
