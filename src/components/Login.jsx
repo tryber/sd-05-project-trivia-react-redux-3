@@ -86,7 +86,7 @@ class Login extends React.Component {
     const { name, email } = this.state;
     return (
       <Container centered rounded className="login">
-        <p className='title'>Login</p>
+        <p className='title'>Sua Vez</p>
         <form
           className="form"
           onSubmit={(ev) => {

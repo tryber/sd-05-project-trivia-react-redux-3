@@ -15,17 +15,20 @@ class Header extends React.Component {
     const { src, score } = this.props;
     return (
       <header className="container-header">
+        <div className="subcontainer nes-container is-rounded">  
         <img
           data-testid="header-profile-picture"
           alt="imagem do usuário"
           src={src}
-        />
-        <p data-testid="header-player-name">{name}</p>
-        <p>{email}</p>
-        <p className="score" data-testid="header-score">
-          <span data-testid="feedback-total-score">
+          />
+        <p className="space name" data-testid="header-player-name">{name}</p>
+        <p className="space" >{email}</p>
+          </div>
+        <p className="score nes-container is-rounded" data-testid="header-score">
+          <div className="nes-icon coin is-medium"></div>
+          <div data-testid="feedback-total-score">
             {score}
-          </span>
+          </div>
         </p>
       </header>
     );

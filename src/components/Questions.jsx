@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'nes.css/css/nes.min.css';
+import './Questions.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuestions, updateScore } from '../actions';
+import { formatText } from '../utils';
 import {
   addScore,
   resetScore,
@@ -10,12 +13,17 @@ import {
   saveRankingLocalStorage,
 } from '../services/localStorage';
 
-import 'nes.css/css/nes.min.css';
-import './Questions.css';
 import changeColors from '../services/changeColors';
+import coin from '../assets/sound/coin3.wav';
+import wrong from '../assets/sound/wrong.wav';
 
 const ENABLED = { disableButton: true, showNext: true };
 const DISABLED = { disableButton: false, showNext: false };
+
+function playCoin(snd = 'coin') {
+  const sound = document.getElementById(snd);
+  sound.play();
+}
 
 class Questions extends React.Component {
   constructor() {
@@ -59,6 +67,7 @@ class Questions extends React.Component {
   computeScore({ difficulty }) {
     const { time } = this.state;
     const { setScore } = this.props;
+    playCoin()
     let score = 0;
     switch (difficulty) {
       case 'easy':
@@ -101,9 +110,9 @@ class Questions extends React.Component {
               key={answer.incorrect}
               className="nes-btn wrong-answer"
               disabled={disableButton}
-              onClick={() => changeColors() || this.setState(ENABLED)}
+              onClick={() => changeColors() || this.setState(ENABLED) || playCoin('wrong')}
             >
-              {answer.incorrect.replace('&quot;', '')}
+              {formatText(answer.incorrect)}
             </button>
           ) : (
             <button
@@ -113,7 +122,7 @@ class Questions extends React.Component {
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >
-              {answer.correct.replace('&quot;', '')}
+              {formatText(answer.correct)}
             </button>
           )
       ))
@@ -124,9 +133,16 @@ class Questions extends React.Component {
     const { questions } = this.props;
     const { questionNumber } = this.state;
     return (
-      <div>
-        <p data-testid="question-category">{questions[questionNumber].category}</p>
-        <p data-testid="question-text">{questions[questionNumber].question.replace('&quot;', '')}</p>
+      <div className="questions-container">
+        <audio id="wrong"><source src={wrong}></source></audio>
+        <audio id="coin"><source src={coin}></source></audio>
+        <p data-testid="question-category">
+          {formatText(questions[questionNumber].category)}
+        </p>
+        <p data-testid="question-text" className='nes-balloon from-left is-dark'>
+          {formatText(questions[questionNumber].question)}
+        </p>
+        <i className="nes-octocat animate interviewer"></i>
       </div>
     );
   }
@@ -144,7 +160,7 @@ class Questions extends React.Component {
           </div>
           {(showNext) ? <button
             data-testid="btn-next"
-            className="nes-btn is-primary"
+            className="nes-btn is-error"
             onClick={() => {
               if (questionNumber < questions.length - 1) {
                 clearInterval(this.timer);
