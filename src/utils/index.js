@@ -7,9 +7,14 @@ const unique = (text) => (
 
 export const formatText = (text) => (
   text
-    .replace('&quot;', '')
-    .replace('&#039;', '`')
-    .replace('&eacute;', 'e')
+    .replace(/&#039;/gi, '')
+    .replace(/&quot;/gi, '`')
+    .replace(/&aacute;/gi, 'á')
+    .replace(/&eacute;/gi, 'é')
+    .replace(/&iacute;/gi, 'í')
+    .replace(/&oacute;/gi, 'ó')
+    .replace(/&uacute;/gi, 'ú')
+    
 )
 
 export default unique;

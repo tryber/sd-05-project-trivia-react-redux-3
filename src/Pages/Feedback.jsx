@@ -27,11 +27,14 @@ class Feedback extends React.Component {
             dark
             className="questions nes-container is-centered is-rounded"
           >
-            <p data-testid="feedback-total-question">{assertions}</p>
+            <div data-testid="feedback-total-question" className="feedback-score">
+              <div>{assertions}</div>
+              <div className="nes-icon trophy"></div>
+            </div>
             {assertions >= 3 ? (
-              <h3 data-testid="feedback-text">Mandou bem!</h3>
+              <h3 className="feedback-text" data-testid="feedback-text">Mandou bem!</h3>
             ) : (
-              <h3 data-testid="feedback-text">Podia ser melhor...</h3>
+              <h3 className="feedback-text" data-testid="feedback-text">Podia ser melhor...</h3>
             )}
             <button
               className="nes-btn is-error"
@@ -42,6 +45,7 @@ class Feedback extends React.Component {
             >
               Jogar novamente
             </button>
+            <hr/>
             <button
               className="nes-btn is-error"
               type="button"
@@ -54,6 +58,7 @@ class Feedback extends React.Component {
             </button>
           </div>
         </div>
+        <div />
       </div>
     );
   }

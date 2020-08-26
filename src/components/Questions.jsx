@@ -108,7 +108,7 @@ class Questions extends React.Component {
             <button
               data-testid={'wrong-answer'}
               key={answer.incorrect}
-              className="nes-btn wrong-answer"
+              className="nes-btn wrong-answer options"
               disabled={disableButton}
               onClick={() => changeColors() || this.setState(ENABLED) || playCoin('wrong')}
             >
@@ -118,7 +118,7 @@ class Questions extends React.Component {
             <button
               data-testid="correct-answer"
               key={answer.correct}
-              className="nes-btn correct-answer"
+              className="nes-btn correct-answer options"
               disabled={disableButton}
               onClick={() => { this.computeScore(questions[questionNumber]); }}
             >

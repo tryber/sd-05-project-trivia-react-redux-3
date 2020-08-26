@@ -52,7 +52,7 @@
 
 .navigation {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 32px;
   margin: 0;
   padding: 0;
@@ -63,15 +63,15 @@
   border-radius: 1px 0 0 1px;
   border-right: none;
   border: none;
-  width: 80%;
+  padding: 16px 32px;
 }
 
-.btn-settings {
+/*.btn-settings {
   border-left: 3px dotted #212121;
   border-radius: 0 1px 1px 0;
   border: none;
   width: 20%;
-}
+} */
 
 /* Game */
 
@@ -87,24 +87,17 @@
   display: flex;
   font-size: 1.5rem;
   justify-content: space-between;
+  padding: 16px 64px;
   width: 100%;
 }
 
 .subcontainer {
   align-items: center;
   display: flex;
-  flex-direction: row;
-  font-size: 3rem;
+  font-size: 1.5rem;
   justify-items: center;
-  margin-top: 15px;
-  padding-left: 50px;
-  justify-content: space-evenly;
-}
-
-.space {
-  align-items: center;
-  margin-top: 15px;
-  padding-left: 50px;
+  justify-content: space-around;
+  width: 40%;
 }
 
 .nes-avatar {
@@ -117,20 +110,23 @@
   flex-direction: row-reverse;
   font-size: 3rem;
   justify-items: center;
-  margin-top: 15px;
-  padding-left: 50px;
+  width: 20%;
 }
 
 .nes-icon {
   height: 16px !important;
-  margin: 0 16px;
   width: 16px !important;
+  margin-left: 8px;
 }
 
 .questions {
   background: #370617;
   flex-direction: column;
   width: 90%;
+}
+
+.options {
+  min-width: 25%;
 }
 
 .questions .answers {
@@ -148,21 +144,36 @@
   align-self: flex-start;
 }
 
-/* Ranking */
+/* Feedback */
 
-.rank-list {
-  display: flex;
-  justify-content: space-around;
+.feedback-score {
   align-items: center;
-  border: black solid 1px;
-  width: 30%;
-  box-sizing: border-box;
+  display: flex;
+  font-size: 3rem;
+  justify-items: space-around;
 }
 
+.feedback-text {
+  font-size: 1.3rem;
+}
+
+/* Ranking */
+
 .rank-container {
-  align-items: center;
   font-size: 3rem;
-  justify-items: center;
-  margin-top: 15px;
-  padding-left: 50px;
+  padding: 32px 0;
+  text-align: center;
+}
+
+.rank-list {
+  width: 33%;
+}
+
+.rank-card {
+  align-items: center;
+  display: flex;
+  font-size: 1.7rem;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  width: 90%;
 }

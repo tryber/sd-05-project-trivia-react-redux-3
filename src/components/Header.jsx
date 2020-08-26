@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchImage } from '../actions';
-import '../styles/style.css';
-import { Container } from 'nes-react';
+import '../styles/style.css'
 class Header extends React.Component {
   componentDidMount() {
     const { getImage } = this.props;
@@ -16,24 +15,21 @@ class Header extends React.Component {
     const { src, score } = this.props;
     return (
       <header className="container-header">
-        <Container className="space" title="Player" dark rounded>
+        <div className="subcontainer nes-container is-rounded">  
           <img
-            className="nes-avatar is-rounded is-large"
             data-testid="header-profile-picture"
             alt="imagem do usuário"
             src={src}
           />
-          <p className="space name" data-testid="header-player-name">
-            {name}
-          </p>
-          <p className="space">{email}</p>
-        </Container>
-        <Container rounded dark title="Score">
-          <p data-testid="header-score">
-            <div className="nes-icon coin is-medium"></div>
-            <div data-testid="feedback-total-score">{score}</div>
-          </p>
-        </Container>
+          <div className="space name" data-testid="header-player-name">{name}</div>
+          <div className="space" >{email}</div>
+        </div>
+        <div className="score nes-container is-rounded" data-testid="header-score">
+          <div className="nes-icon coin is-medium"></div>
+          <div data-testid="feedback-total-score">
+            {score}
+          </div>
+        </div>
       </header>
     );
   }

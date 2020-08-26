@@ -21,7 +21,7 @@
   }
 }
 
-.App-header, .game {
+.App-header, .game, .rank-container {
   background-image: url('./assets/background.jpg');
   background-attachment: fixed;
   background-size: cover;

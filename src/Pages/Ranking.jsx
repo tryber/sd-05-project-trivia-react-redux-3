@@ -21,22 +21,24 @@ class Ranking extends React.Component {
   render() {
     const { rankList } = this.state;
     return (
-      <div className="game">
         <div className="rank-container">
           <h2 data-testid="ranking-title">Ranking</h2>
-          {rankList.map(({ name, picture, score }, index) => (
-            <div className="rank-list" key={unique(name)}>
-              <img
-                data-testid={`player-picture-${index}`}
-                alt="imagem do usuário"
-                src={picture}
-              />
-              <p data-testid={`player-name-${index}`}>{name}</p>
-              <p data-testid={`player-score-${index}`}>{score}</p>
-            </div>
-          ))}
+          <div className="rank-list">
+            {rankList.map(({ name, picture, score }, index) => (
+              <div className="rank-card" key={unique(name)}>
+                <img
+                  data-testid={`player-picture-${index}`}
+                  alt="imagem do usuário"
+                  src={picture}
+                />
+                <span data-testid={`player-name-${index}`}>{name}</span>
+                <span data-testid={`player-score-${index}`}>{score}</span>
+              </div>
+            ))}
+          </div>
           <button
             type="button"
+            className="nes-btn"
             data-testid="btn-go-home"
             onClick={() => {
               this.backToHome();
@@ -45,7 +47,6 @@ class Ranking extends React.Component {
             Home
           </button>
         </div>
-      </div>
     );
   }
 }

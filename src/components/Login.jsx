@@ -101,16 +101,7 @@ class Login extends React.Component {
               disabled={!name.length || !email.length}
               className="btn btn-play nes-btn is-error"
             >
-              Jogar
-            </Button>
-            <Button
-              testId="btn-settings"
-              onClick={(ev) => {
-                this.Menu(ev);
-              }}
-              className="btn btn-settings nes-btn is-error"
-            >
-              <ControllerIcon controller="snes-jp" />
+              Jogar <ControllerIcon controller="snes-jp" />
             </Button>
           </div>
         </form>
