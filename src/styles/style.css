@@ -2,7 +2,7 @@
 .btn,
 .label .input,
 .container-header {
-  font-family: "Press Start 2P", cursive;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .form .label,
@@ -101,15 +101,14 @@
   justify-content: space-evenly;
 }
 
-.name{
-  border-right: solid;
-  padding-right: 50px;
-}
-
 .space {
   align-items: center;
   margin-top: 15px;
   padding-left: 50px;
+}
+
+.nes-avatar {
+  image-rendering: pixelated;
 }
 
 .container-header .score {
@@ -147,4 +146,23 @@
 
 .interviewer {
   align-self: flex-start;
+}
+
+/* Ranking */
+
+.rank-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: black solid 1px;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+.rank-container {
+  align-items: center;
+  font-size: 3rem;
+  justify-items: center;
+  margin-top: 15px;
+  padding-left: 50px;
 }
